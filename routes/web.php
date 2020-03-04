@@ -20,10 +20,13 @@
 Auth::routes();
 
 
-
+//ログイン画面の表示
 Route::get('/login', 'Auth\LoginController@add');
 
-
+//アカウント作成画面の表示
 Route::get('/register', 'Auth\RegisterController@add');
 
+//レビュー画面関係の処理
 Route::get('/home', 'ReviewController@index');
+
+Route::get('/home/create', 'ReviewController@add');
