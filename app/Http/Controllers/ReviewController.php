@@ -16,7 +16,9 @@ class ReviewController extends Controller {
    }
 
    public function create() {
-
+     $this->validate($request, Book::$reles);
+     $this->validate($request, Reviews::$reles);
+     
 
      return redirect('review/confirm');
    }
