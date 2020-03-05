@@ -29,4 +29,7 @@ Route::get('/register', 'Auth\RegisterController@add');
 //レビュー画面関係の処理
 Route::get('/home', 'ReviewController@index');
 
-Route::get('/home/create', 'ReviewController@add');
+Route::get('/home/create', 'ReviewController@create_add');
+Route::post('/home/create', 'ReviewController@create');
+
+Route::get('/home/create/confirm', 'ReviewController@confirm_add');

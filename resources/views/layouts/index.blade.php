@@ -37,7 +37,7 @@
                  <a href="{{ action('ReviewController@index') }}" class="nav-link btn btn-danger">レビュー 一覧</a>
                </li>
                <li class="nav-item">
-                 <a href="{{ action('ReviewController@add') }}" class="nav-link btn btn-warning">レビュー 作成</a>
+                 <a href="{{ action('ReviewController@create_add') }}" class="nav-link btn btn-warning">レビュー 作成</a>
                </li>
              </ul>
             <button type="button" class="btn btn-secondary dropdown-toggle bg-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -99,6 +99,7 @@
 
     <main>
       @yield('content')
+      @csrf
 
 
 

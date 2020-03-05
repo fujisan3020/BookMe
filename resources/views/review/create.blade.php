@@ -7,7 +7,7 @@
        <p><br></p>
        <h1 class="text-sm-center">レビュー作成</h1>
          <div class="col">
-            <form action="" method="post">
+            <form action="{{ action('ReviewController@create') }}" method="post">
               <fieldse class="form-group">
                 <label for="title">本のタイトル</label>
                 <strong class="text-danger">(必須)</strong>

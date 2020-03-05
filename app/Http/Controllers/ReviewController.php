@@ -10,7 +10,20 @@ class ReviewController extends Controller {
      return view('review.home');
    }
 
-   public function add() {
+
+   public function create_add() {
      return view('review.create');
    }
+
+   public function create() {
+
+
+     return redirect('review/confirm');
+   }
+
+   public function confirm_add() {
+     return view('review.confirm');
+   }
+
+
 }
