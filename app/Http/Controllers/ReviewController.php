@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Book;
+use App\Review;
+
 class ReviewController extends Controller {
    public function index() {
      return view('review.home');
@@ -17,7 +20,7 @@ class ReviewController extends Controller {
 
    public function create() {
      $this->validate($request, Book::$reles);
-     $this->validate($request, Reviews::$reles);
+     $this->validate($request, Review::$reles);
      
 
      return redirect('review/confirm');
