@@ -22,8 +22,11 @@ class ReviewController extends Controller {
    public function confirm(Request $request) {
      $this->validate($request, Book::$rules);
      $this->validate($request, Review::$rules);
+     // if (!null == ($request->input('image'))) {
+     //   $this->validate($request, Book::$image_rules);
+     // }
      $form = $request->all();
-     unset($form['_token']);
+     unset($form['_token']);  //_tokeの削除は必須
      return view('review.confirm', ['form' => $form]);
    }
 
@@ -32,6 +35,12 @@ class ReviewController extends Controller {
      $form = $request->all();
      $book = new Book;
      $review = new Review;
+     // if(!null == ($form['image'])) {
+     //    $path = $request->file('image')->store('public/image');
+     //    $book->image_path = basename($path);
+     //  } else {
+     //    $book->image_path = null;
+     //  }
      unset($form['image']);
      unset($form['_token']);
      $book->image_path = null;
@@ -39,7 +48,6 @@ class ReviewController extends Controller {
      $book->genre = $form['genre'];
      $book->author = $form['author'];
      $book->publisher = $form['publisher'];
-     // $book->igame_path = $form['image'];
      $book->save();
 
      $review->user_id = Auth::id();

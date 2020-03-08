@@ -7,7 +7,7 @@
        <p><br></p>
        <h1 class="text-sm-center">レビュー作成</h1>
          <div class="col">
-            <form action="{{ action('ReviewController@confirm') }}" method="post">
+            <form action="{{ action('ReviewController@confirm') }}" method="post" enctype="multipart/form-data">
               @csrf
               <fieldse class="form-group">
                 <label for="title">本のタイトル</label>
@@ -26,17 +26,17 @@
                 <strong class="text-danger">(必須)</strong>
                 <select class="form-control" id="genre" name="genre">
                   <option value="">---</option>
-                  <option value="ビジネス・経済">ビジネス・経済</option>
-                  <option value="社会・政治">社会・政治</option>
-                  <option value="投資・金融">投資・金融</option>
-                  <option value="自然・環境">自然・環境</option>
-                  <option value="地理・歴史">地理・歴史</option>
-                  <option value="文化・思想">文化・思想</option>
-                  <option value="教育・自己啓発">教育・自己啓発</option>
-                  <option value="科学・テクノロジー">科学・テクノロジー</option>
-                  <option value="旅行・紀行">旅行・紀行</option>
-                  <option value="スポーツ・アウトドア">スポーツ・アウトドア</option>
-                  <option value="コミック">コミック</option>
+                  <option value="ビジネス・経済" @if( old('genre') == 'ビジネス・経済') selected @endif>ビジネス・経済</option>
+                  <option value="社会・政治" @if( old('genre') == '社会・政治') selected @endif>社会・政治</option>
+                  <option value="投資・金融" @if( old('genre') == '投資・金融') selected @endif>投資・金融</option>
+                  <option value="自然・環境" @if( old('genre') == '自然・環境') selected @endif>自然・環境</option>
+                  <option value="地理・歴史" @if( old('genre') == '地理・歴史') selected @endif>地理・歴史</option>
+                  <option value="文化・思想" @if( old('genre') == '文化・思想') selected @endif>文化・思想</option>
+                  <option value="教育・自己啓発" @if( old('genre') == '教育・自己啓発') selected @endif>教育・自己啓発</option>
+                  <option value="科学・テクノロジー" @if( old('genre') == '科学・テクノロジー') selected @endif>科学・テクノロジー</option>
+                  <option value="旅行・紀行" @if( old('genre') == '旅行・紀行') selected @endif>旅行・紀行</option>
+                  <option value="スポーツ・アウトドア"@if( old('genre') == 'スポーツ・アウトドア') selected @endif>スポーツ・アウトドア</option>
+                  <option value="その他" @if( old('genre') == 'その他') selected @endif>その他</option>
                 </select>
                 @error('genre')
                 <div class="error">

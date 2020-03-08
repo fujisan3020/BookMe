@@ -101,7 +101,7 @@
            <a href="#" class="nav-link btn-success">スポーツ・アウトドア</a>
          </li>
          <li class="nav-item">
-           <a href="#" class="nav-link btn-info">コミック</a>
+           <a href="#" class="nav-link btn-info">その他</a>
          </li>
        </ul>
 

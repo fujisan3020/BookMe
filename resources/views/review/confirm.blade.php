@@ -6,13 +6,15 @@
   <div class="container">
     <p><br></p>
     <h1 class="text-sm-center">レビュー内容確認</h1>
-    <form action="{{ action('ReviewController@create') }}" method="post">
+    <form action="{{ action('ReviewController@create') }}" method="post" enctype="multipart/form-data">
       @csrf
       <input type="hidden" name="title" value="{{ $form['title'] }}">
       <input type="hidden" name="genre" value="{{ $form['genre'] }}">
       <input type="hidden" name="author" value="{{ $form['author'] }}">
       <input type="hidden" name="publisher" value="{{ $form['publisher'] }}">
+      @if(isset($form['image']))
       <input type="hidden" name="image" value="{{ $form['image'] }}">
+      @endif
       <input type="hidden" name="review" value="{{ $form['review'] }}">
       <input type="hidden" name="practice" value="{{ $form['practice'] }}">
 

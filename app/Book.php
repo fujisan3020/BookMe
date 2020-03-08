@@ -12,6 +12,9 @@ class Book extends Model {
       'genre' => ['required', 'string'],
       'author' => ['required', 'string', 'max:255'],
       'publisher' => ['required', 'string', 'max:255'],
-      // 'image' => ['file', 'image'],
     );
+
+    // public static $image_rules = array(
+    //   'image' => ['image'],
+    // );
 }
