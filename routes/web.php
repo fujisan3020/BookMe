@@ -27,9 +27,9 @@ Route::get('/login', 'Auth\LoginController@add');
 Route::get('/register', 'Auth\RegisterController@add');
 
 //レビュー画面関係の処理
-Route::get('/home', 'ReviewController@index');
+Route::get('/', 'ReviewController@index');
 
-Route::get('/home/create', 'ReviewController@create_add');
-Route::post('/home/create', 'ReviewController@create');
+Route::get('/review/create', 'ReviewController@add');
+Route::post('/review/confirm', 'ReviewController@confirm');
 
-Route::get('/home/create/confirm', 'ReviewController@confirm_add');
+Route::post('/review/create', 'ReviewController@create');

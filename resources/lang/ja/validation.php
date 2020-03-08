@@ -155,7 +155,7 @@ return [
      'genre' => '本のジャンル',
      'author' => '本の著者',
      'publisher' => '本の出版社',
-     'image_path' => '本の画像',
+     'image' => '本の画像',
 
      'review' => 'レビュー',
      'practice' => '実践できること',

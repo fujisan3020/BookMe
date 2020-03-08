@@ -20,6 +20,17 @@
       border-radius: 5px;
       border: solid thin silver;
     }
+    .error {
+      margin-top: 5px;
+      margin-bottom: 15px;
+      color: red;
+    }
+    .review-value {
+      background-color: #F2F2F2;
+      border: 1px silver solid;
+      border-radius: 5px;
+      padding: 3px 5px;
+    }
     </style>
 
 
@@ -37,7 +48,7 @@
                  <a href="{{ action('ReviewController@index') }}" class="nav-link btn btn-danger">レビュー 一覧</a>
                </li>
                <li class="nav-item">
-                 <a href="{{ action('ReviewController@create_add') }}" class="nav-link btn btn-warning">レビュー 作成</a>
+                 <a href="{{ action('ReviewController@add') }}" class="nav-link btn btn-warning">レビュー 作成</a>
                </li>
              </ul>
             <button type="button" class="btn btn-secondary dropdown-toggle bg-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -99,7 +110,6 @@
 
     <main>
       @yield('content')
-      @csrf
 
 
 
