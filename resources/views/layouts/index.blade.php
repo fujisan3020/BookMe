@@ -68,7 +68,22 @@
             <small><small><small>あなたの気づきを価値あるものに。</small></small></small><br>
             <big><big>BookMe</big></big></a></h1>
        </div>
+       <div class="col-md-11">
+                <form action="" method="get">
+                    <div class="form-group row">
+                        <label class="col-md-2">タイトル</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="cond_title" value="">
+                        </div>
+                        <div class="">
+                            {{ csrf_field() }}
+                            <input type="submit" class="btn btn-primary" value="検索">
+                        </div>
+                    </div>
+                </form>
+            </div>
 
+       <div class="">
        <ul class="nav nav-pills">
          <li class="nav-item">
            <a href="#" class="nav-link btn-danger">ビジネス・経済</a>
@@ -104,6 +119,7 @@
            <a href="#" class="nav-link btn-info">その他</a>
          </li>
        </ul>
+     </div>
 
 
     </header>

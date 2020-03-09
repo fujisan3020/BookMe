@@ -23,6 +23,8 @@ Auth::routes();
 //ログイン画面の表示
 Route::get('/login', 'Auth\LoginController@add');
 
+
+
 //アカウント作成画面の表示
 Route::get('/register', 'Auth\RegisterController@add');
 

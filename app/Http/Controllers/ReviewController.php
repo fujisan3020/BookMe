@@ -6,19 +6,24 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\User;
 use App\Book;
 use App\Review;
 
 class ReviewController extends Controller {
-   public function index() {
-     return view('review.home');
+  //投稿レビュー一覧表示
+   public function index(Request $request) {
+     $posts = Book::select('title', 'author', 'genre')->get();
+     $reviewer = User::select('name')->first();
+     return view('review.home', ['posts' => $posts, 'reviewer' => $reviewer]);
    }
 
-
+  //レビュー作成画面表示
    public function add() {
      return view('review.create');
    }
 
+   //レビュー入力内容確認
    public function confirm(Request $request) {
      $this->validate($request, Book::$rules);
      $this->validate($request, Review::$rules);
@@ -30,7 +35,7 @@ class ReviewController extends Controller {
      return view('review.confirm', ['form' => $form]);
    }
 
-
+   //レビュー作成・投稿
    public function create(Request $request) {
      $form = $request->all();
      $book = new Book;
