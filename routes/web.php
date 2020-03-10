@@ -19,19 +19,19 @@
 
 Auth::routes();
 
-
 //ログイン画面の表示
 Route::get('/login', 'Auth\LoginController@add');
-
-
 
 //アカウント作成画面の表示
 Route::get('/register', 'Auth\RegisterController@add');
 
-//レビュー画面関係の処理
+
+Route::group(['middleware' => 'auth'], function() {
+  //レビュー画面関係の処理
 Route::get('/', 'ReviewController@index');
 
 Route::get('/review/create', 'ReviewController@add');
 Route::post('/review/confirm', 'ReviewController@confirm');
 
 Route::post('/review/create', 'ReviewController@create');
+});

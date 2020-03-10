@@ -11,4 +11,5 @@ class Review extends Model {
       'review' => ['required', 'string', 'max:255'],
       'practice' => ['required', 'string', 'max:255'],
     );
+
 }

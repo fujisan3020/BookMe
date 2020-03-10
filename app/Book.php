@@ -17,4 +17,5 @@ class Book extends Model {
     // public static $image_rules = array(
     //   'image' => ['image'],
     // );
+
 }
