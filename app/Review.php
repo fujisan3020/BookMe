@@ -12,4 +12,12 @@ class Review extends Model {
       'practice' => ['required', 'string', 'max:255'],
     );
 
+    public function user() {
+      return $this->belongsTo('App\User');
+    }
+
+    public function book() {
+      return $this->belongsTo('App\Book');
+    }
+
 }

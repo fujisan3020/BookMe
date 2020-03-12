@@ -86,7 +86,7 @@
        <div class="">
        <ul class="nav nav-pills">
          <li class="nav-item">
-           <a href="#" class="nav-link btn-danger">ビジネス・経済</a>
+           <a href="{{ action('ReviewController@business_economy') }}" class="nav-link btn-danger">ビジネス・経済</a>
          </li>
          <li class="nav-item">
            <a href="#" class="nav-link btn-warning">社会・政治</a>

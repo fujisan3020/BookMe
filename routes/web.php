@@ -27,11 +27,17 @@ Route::get('/register', 'Auth\RegisterController@add');
 
 
 Route::group(['middleware' => 'auth'], function() {
-  //レビュー画面関係の処理
+//レビューの一覧表示
 Route::get('/', 'ReviewController@index');
 
-Route::get('/review/create', 'ReviewController@add');
-Route::post('/review/confirm', 'ReviewController@confirm');
+//ナビバーからのレビュー一覧の表示
+Route::get('/search', 'ReviewController@business_economy');
 
+
+//レビュー作成画面の表示
+Route::get('/review/create', 'ReviewController@add');
+//入力されたレビューの確認
+Route::post('/review/confirm', 'ReviewController@confirm');
+//レビュー作成・投稿
 Route::post('/review/create', 'ReviewController@create');
 });

@@ -1,6 +1,6 @@
 @extends('layouts.index')
 
-@section('title', 'レビュー 一覧')
+@section('title', '検索レビュー 一覧')
 
 @section('content')
     @foreach($reviews as $review)
@@ -14,7 +14,7 @@
              <h2>{{ $review->book->title }}</h2>
              <p>作者： {{ $review->book->author }}</p>
              <p>ジャンル：{{ $review->book->genre }}</p>
-             <p>レビュワー：{{ $review->user->name }}</p>
+             <p>レビュワー：</p>
             </div>
             </a>
          </div>

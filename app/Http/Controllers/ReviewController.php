@@ -13,9 +13,14 @@ use App\Review;
 class ReviewController extends Controller {
   //投稿レビュー一覧表示
    public function index(Request $request) {
-     $posts = Book::select('title', 'author', 'genre')->get();
-     $reviewer = User::select('name')->first();
-     return view('review.home', ['posts' => $posts, 'reviewer' => $reviewer]);
+    $reviews = Review::all();
+    return view('review.home', ['reviews' => $reviews]);
+   }
+
+   //ジャンル別レビュー一覧表示
+   public function business_economy() {
+     $reviews = Review::all();
+     return view('review.search', ['reviews' => $reviews]);
    }
 
   //レビュー作成画面表示
@@ -55,7 +60,7 @@ class ReviewController extends Controller {
      $book->publisher = $form['publisher'];
      $book->save();
 
-     $review->user_id = Auth::id();
+     $review->user_id = Auth::id(); //Auth::id():ログイン中のユーザーのID
      $review->book_id = $book->id;
      $review->review = $form['review'];
      $review->practice = $form['practice'];

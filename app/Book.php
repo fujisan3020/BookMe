@@ -18,4 +18,8 @@ class Book extends Model {
     //   'image' => ['image'],
     // );
 
+    public function user() {
+      return $this->belongsTo('App\User');
+    }
+
 }
