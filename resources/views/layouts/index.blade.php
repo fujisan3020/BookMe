@@ -9,6 +9,10 @@
     <mata name="csrf-token" content="{{ csrf_token() }}">
 
     <style>
+    body {
+      background-image: url(https://i.pinimg.com/originals/e5/e8/c0/e5e8c030d4a67fd11d55b57a613517bd.jpg);
+      background-size: auto;
+    }
     a {
       text-decoration: none;
     }
@@ -64,59 +68,57 @@
        </div>
 
        <div class="logo text-sm-center">
-          <h1><a class="display-4 " href="{{ action('ReviewController@index') }}">
+          <h1><a class="display-4" href="{{ action('ReviewController@index') }}">
             <small><small><small>あなたの気づきを価値あるものに。</small></small></small><br>
             <big><big>BookMe</big></big></a></h1>
        </div>
-       <div class="col-md-11">
-                <form action="" method="get">
-                    <div class="form-group row">
-                        <label class="col-md-2">タイトル</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" name="cond_title" value="">
-                        </div>
-                        <div class="">
-                            {{ csrf_field() }}
-                            <input type="submit" class="btn btn-primary" value="検索">
-                        </div>
-                    </div>
-                </form>
-            </div>
 
-       <div class="">
+
+       <div class="row">
+         <div class="text-center col-md-8 col-md-offset-2">
+           <div class="input-group">
+             <input type="text" class="form-control" placeholder="本のタイトル、作者を検索">
+             <span class="input-group-btn">
+               <button class="btn btn-secondary" type="button">検索</button>
+             </span>
+           </div>
+         </div>
+       </div>
+
+       <div>
        <ul class="nav nav-pills">
          <li class="nav-item">
            <a href="{{ action('ReviewController@business_economy') }}" class="nav-link btn-danger">ビジネス・経済</a>
          </li>
          <li class="nav-item">
-           <a href="#" class="nav-link btn-warning">社会・政治</a>
+           <a href="{{ action('ReviewController@society_politics') }}" class="nav-link btn-warning">社会・政治</a>
          </li>
          <li class="nav-item">
-           <a href="#" class="nav-link btn-primary">投資・金融</a>
+           <a href="{{ action('ReviewController@investment_finance') }}" class="nav-link btn-primary">投資・金融</a>
          </li>
          <li class="nav-item">
-           <a href="#" class="nav-link btn-success">自然・環境</a>
+           <a href="{{ action('ReviewController@nature_environment') }}" class="nav-link btn-success">自然・環境</a>
          </li>
          <li class="nav-item">
-           <a href="#" class="nav-link btn-info">歴史・地理</a>
+           <a href="{{ action('ReviewController@history_geography') }}" class="nav-link btn-info">歴史・地理</a>
          </li>
          <li class="nav-item">
-           <a href="#" class="nav-link btn-primary">文化・思想</a>
+           <a href="{{ action('ReviewController@culture_thought') }}" class="nav-link btn-primary">文化・思想</a>
          </li>
          <li class="nav-item">
-           <a href="#" class="nav-link btn-danger">教育・自己啓発</a>
+           <a href="{{ action('ReviewController@education_selfdevelopment') }}" class="nav-link btn-danger">教育・自己啓発</a>
          </li>
          <li class="nav-item">
-           <a href="#" class="nav-link btn-warning">テクノロジー</a>
+           <a href="{{ action('ReviewController@science_technology') }}" class="nav-link btn-warning">科学・テクノロジー</a>
          </li>
          <li class="nav-item">
-           <a href="#" class="nav-link btn-primary">旅行・紀行</a>
+           <a href="{{ action('ReviewController@travel') }}" class="nav-link btn-primary">旅行・紀行</a>
          </li>
          <li class="nav-item">
-           <a href="#" class="nav-link btn-success">スポーツ・アウトドア</a>
+           <a href="{{ action('ReviewController@sports_outdoor') }}" class="nav-link btn-success">スポーツ・アウトドア</a>
          </li>
          <li class="nav-item">
-           <a href="#" class="nav-link btn-info">その他</a>
+           <a href="{{ action('ReviewController@other') }}" class="nav-link btn-info">その他</a>
          </li>
        </ul>
      </div>

@@ -19,9 +19,92 @@ class ReviewController extends Controller {
 
    //ジャンル別レビュー一覧表示
    public function business_economy() {
-     $reviews = Review::all();
+     $reviews = Review::whereHas('book', function($q) {
+       $q->where('genre', 'ビジネス・経済');
+     })->get();
      return view('review.search', ['reviews' => $reviews]);
    }
+
+   public function society_politics() {
+     $reviews = Review::whereHas('book', function($q) {
+       $q->where('genre', '社会・政治');
+     })->get();
+     return view('review.search', ['reviews' => $reviews]);
+   }
+
+   public function investment_finance() {
+     $reviews = Review::whereHas('book', function($q) {
+       $q->where('genre', '投資・金融');
+     })->get();
+     return view('review.search', ['reviews' => $reviews]);
+   }
+
+   public function nature_environment() {
+     $reviews = Review::whereHas('book', function($q) {
+       $q->where('genre', '自然・環境');
+     })->get();
+     return view('review.search', ['reviews' => $reviews]);
+   }
+
+   public function history_geography() {
+     $reviews = Review::whereHas('book', function($q) {
+       $q->where('genre', '歴史・地理');
+     })->get();
+     return view('review.search', ['reviews' => $reviews]);
+   }
+
+   public function culture_thought() {
+     $reviews = Review::whereHas('book', function($q) {
+       $q->where('genre', '文化・思想');
+     })->get();
+     return view('review.search', ['reviews' => $reviews]);
+   }
+
+   public function education_selfdevelopment() {
+     $reviews = Review::whereHas('book', function($q) {
+       $q->where('genre', '教育・自己啓発');
+     })->get();
+     return view('review.search', ['reviews' => $reviews]);
+   }
+
+   public function science_technology() {
+     $reviews = Review::whereHas('book', function($q) {
+       $q->where('genre', '科学・テクノロジー');
+     })->get();
+     return view('review.search', ['reviews' => $reviews]);
+   }
+
+   public function travel() {
+     $reviews = Review::whereHas('book', function($q) {
+       $q->where('genre', '旅行・紀行');
+     })->get();
+     return view('review.search', ['reviews' => $reviews]);
+   }
+
+   public function sports_outdoor() {
+     $reviews = Review::whereHas('book', function($q) {
+       $q->where('genre', 'スポーツ・アウトドア');
+     })->get();
+     return view('review.search', ['reviews' => $reviews]);
+   }
+
+   public function other() {
+     $reviews = Review::whereHas('book', function($q) {
+       $q->where('genre', 'その他');
+     })->get();
+     return view('review.search', ['reviews' => $reviews]);
+   }
+
+
+   //レビューー内容の表示
+   public function content(Request $request) {
+     $review = Review::find($request->id);
+     if (empty($review)) {
+          abort(404);
+     }
+    return view('review.content', ['review' => $review]);
+   }
+
 
   //レビュー作成画面表示
    public function add() {
@@ -32,7 +115,7 @@ class ReviewController extends Controller {
    public function confirm(Request $request) {
      $this->validate($request, Book::$rules);
      $this->validate($request, Review::$rules);
-     // if (!null == ($request->input('image'))) {
+     // if (!null == $request->input('image')) {
      //   $this->validate($request, Book::$image_rules);
      // }
      $form = $request->all();

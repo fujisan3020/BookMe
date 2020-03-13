@@ -14,12 +14,12 @@ class Book extends Model {
       'publisher' => ['required', 'string', 'max:255'],
     );
 
-    // public static $image_rules = array(
-    //   'image' => ['image'],
-    // );
+    public static $image_rules = array(
+      'image' => ['file', 'image'],
+    );
 
-    public function user() {
-      return $this->belongsTo('App\User');
+    public function review() {
+      return $this->hasMany('App\Review');
     }
 
 }

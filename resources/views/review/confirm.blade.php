@@ -26,29 +26,28 @@
         </div>
       </fieldset>
       <fieldse class="form-group">
-        <label for="title">本のジャンル</label>
+        <label for="genre">本のジャンル</label>
         <strong class="text-danger">(必須)</strong>
         <div>
           <p class="review-value">{{ $form['genre'] }}</p>
         </div>
       </fieldset>
       <fieldse class="form-group">
-        <label for="title">本の著者</label>
+        <label for="author">本の著者</label>
         <strong class="text-danger">(必須)</strong>
         <div>
           <p class="review-value">{{ $form['author'] }}</p>
         </div>
       </fieldset>
       <fieldse class="form-group">
-        <label for="title">本の出版社</label>
+        <label for="publisher">本の出版社</label>
         <strong class="text-danger">(必須)</strong>
         <div>
           <p class="review-value">{{ $form['publisher'] }}</p>
         </div>
       </fieldset>
       <fieldse class="form-group">
-        <label for="title">本の画像</label>
-        <strong class="text-danger">(必須)</strong>
+        <label for="image">本の画像</label>
         <div>
           @if(isset($form['image']))
           <p class="review-value">{{ $form['image'] }}</p>
@@ -58,14 +57,14 @@
         </div>
       </fieldset>
       <fieldse class="form-group">
-        <label for="title">レビュー</label>
+        <label for="review">レビュー</label>
         <strong class="text-danger">(必須)</strong>
         <div>
           <p class="review-value">{{ $form['review'] }}</p>
         </div>
       </fieldset>
       <fieldse class="form-group">
-        <label for="title">実践できること</label>
+        <label for="practice">実践できること</label>
         <strong class="text-danger">(必須)</strong>
         <div>
           <p class="review-value">{{ $form['practice'] }}</p>
