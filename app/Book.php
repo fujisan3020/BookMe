@@ -18,8 +18,8 @@ class Book extends Model {
       'image' => ['file', 'image'],
     );
 
-    public function review() {
-      return $this->hasMany('App\Review');
-    }
+    // public function review() {
+    //   return $this->hasMany('App\Review');
+    // }
 
 }

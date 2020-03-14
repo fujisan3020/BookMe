@@ -27,10 +27,10 @@ Route::get('/register', 'Auth\RegisterController@add');
 
 
 Route::group(['middleware' => 'auth'], function() {
-//レビューの一覧表示
+//レビューの一覧表示(検索表示を含め)
 Route::get('/', 'ReviewController@index');
+
 //ナビバーからのレビュー一覧の表示
-//ビジネス・経済
 Route::get('/business_economy', 'ReviewController@business_economy');
 Route::get('/society_politics', 'ReviewController@society_politics');
 Route::get('/investment_finance', 'ReviewController@investment_finance');

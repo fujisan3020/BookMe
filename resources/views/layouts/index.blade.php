@@ -9,12 +9,9 @@
     <mata name="csrf-token" content="{{ csrf_token() }}">
 
     <style>
-    body {
+     header {
       background-image: url(https://i.pinimg.com/originals/e5/e8/c0/e5e8c030d4a67fd11d55b57a613517bd.jpg);
       background-size: auto;
-    }
-    a {
-      text-decoration: none;
     }
     .nav-pills {
       margin-top: 30px;
@@ -75,14 +72,17 @@
 
 
        <div class="row">
-         <div class="text-center col-md-8 col-md-offset-2">
-           <div class="input-group">
-             <input type="text" class="form-control" placeholder="本のタイトル、作者を検索">
-             <span class="input-group-btn">
-               <button class="btn btn-secondary" type="button">検索</button>
-             </span>
+         <form action="{{ action('ReviewController@index') }}" method="get">
+           @csrf
+           <div class="text-center col-md-8 col-md-offset-2">
+             <div class="input-group">
+               <input type="text" class="form-control" name="cond_statement" value="" placeholder="本のタイトル、作者を検索">
+               <span class="input-group-btn">
+                 <button class="btn btn-secondary" type="submit">検索</button>
+               </span>
+             </div>
            </div>
-         </div>
+         </form>
        </div>
 
        <div>
@@ -123,12 +123,10 @@
        </ul>
      </div>
 
-
     </header>
 
     <main>
       @yield('content')
-
 
 
 

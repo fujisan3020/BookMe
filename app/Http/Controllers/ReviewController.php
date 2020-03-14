@@ -13,8 +13,15 @@ use App\Review;
 class ReviewController extends Controller {
   //投稿レビュー一覧表示
    public function index(Request $request) {
-    $reviews = Review::all();
-    return view('review.home', ['reviews' => $reviews]);
+     $cond_statement = $request->cond_statement;
+     if ($cond_statement != '') {
+       $reviews = Review::whereHas('book', function($q) {
+         $q->where('title', $cond_statement)->orwhere('author',$cond_statement);
+       })->get();
+     } else {
+       $reviews = Review::all();
+     }
+     return view('review.home', ['reviews' => $reviews, 'cond_statement' => $cond_statement]);
    }
 
    //ジャンル別レビュー一覧表示
@@ -22,77 +29,77 @@ class ReviewController extends Controller {
      $reviews = Review::whereHas('book', function($q) {
        $q->where('genre', 'ビジネス・経済');
      })->get();
-     return view('review.search', ['reviews' => $reviews]);
+     return view('review.home', ['reviews' => $reviews]);
    }
 
    public function society_politics() {
      $reviews = Review::whereHas('book', function($q) {
        $q->where('genre', '社会・政治');
      })->get();
-     return view('review.search', ['reviews' => $reviews]);
+     return view('review.home', ['reviews' => $reviews]);
    }
 
    public function investment_finance() {
      $reviews = Review::whereHas('book', function($q) {
        $q->where('genre', '投資・金融');
      })->get();
-     return view('review.search', ['reviews' => $reviews]);
+     return view('review.home', ['reviews' => $reviews]);
    }
 
    public function nature_environment() {
      $reviews = Review::whereHas('book', function($q) {
        $q->where('genre', '自然・環境');
      })->get();
-     return view('review.search', ['reviews' => $reviews]);
+     return view('review.home', ['reviews' => $reviews]);
    }
 
    public function history_geography() {
      $reviews = Review::whereHas('book', function($q) {
        $q->where('genre', '歴史・地理');
      })->get();
-     return view('review.search', ['reviews' => $reviews]);
+     return view('review.home', ['reviews' => $reviews]);
    }
 
    public function culture_thought() {
      $reviews = Review::whereHas('book', function($q) {
        $q->where('genre', '文化・思想');
      })->get();
-     return view('review.search', ['reviews' => $reviews]);
+     return view('review.home', ['reviews' => $reviews]);
    }
 
    public function education_selfdevelopment() {
      $reviews = Review::whereHas('book', function($q) {
        $q->where('genre', '教育・自己啓発');
      })->get();
-     return view('review.search', ['reviews' => $reviews]);
+     return view('review.home', ['reviews' => $reviews]);
    }
 
    public function science_technology() {
      $reviews = Review::whereHas('book', function($q) {
        $q->where('genre', '科学・テクノロジー');
      })->get();
-     return view('review.search', ['reviews' => $reviews]);
+     return view('review.home', ['reviews' => $reviews]);
    }
 
    public function travel() {
      $reviews = Review::whereHas('book', function($q) {
        $q->where('genre', '旅行・紀行');
      })->get();
-     return view('review.search', ['reviews' => $reviews]);
+     return view('review.home', ['reviews' => $reviews]);
    }
 
    public function sports_outdoor() {
      $reviews = Review::whereHas('book', function($q) {
        $q->where('genre', 'スポーツ・アウトドア');
      })->get();
-     return view('review.search', ['reviews' => $reviews]);
+     return view('review.home', ['reviews' => $reviews]);
    }
 
    public function other() {
      $reviews = Review::whereHas('book', function($q) {
        $q->where('genre', 'その他');
      })->get();
-     return view('review.search', ['reviews' => $reviews]);
+     return view('review.home', ['reviews' => $reviews]);
    }
 
 
@@ -115,7 +122,7 @@ class ReviewController extends Controller {
    public function confirm(Request $request) {
      $this->validate($request, Book::$rules);
      $this->validate($request, Review::$rules);
-     // if (!null == $request->input('image')) {
+     // if (!null == $request->file('image')) {
      //   $this->validate($request, Book::$image_rules);
      // }
      $form = $request->all();
@@ -128,7 +135,7 @@ class ReviewController extends Controller {
      $form = $request->all();
      $book = new Book;
      $review = new Review;
-     // if(!null == ($form['image'])) {
+     // if(!null == $request->file('image')) {
      //    $path = $request->file('image')->store('public/image');
      //    $book->image_path = basename($path);
      //  } else {
@@ -136,7 +143,6 @@ class ReviewController extends Controller {
      //  }
      unset($form['image']);
      unset($form['_token']);
-     $book->image_path = null;
      $book->title = $form['title'];
      $book->genre = $form['genre'];
      $book->author = $form['author'];
