@@ -76,7 +76,11 @@
            @csrf
            <div class="text-center col-md-8 col-md-offset-2">
              <div class="input-group">
-               <input type="text" class="form-control" name="cond_statement" value="" placeholder="本のタイトル、作者を検索">
+               <input type="text" class="form-control" name="cond_statement"
+               @if (isset($cond_statement))
+                 value="{{ $cond_statement }}"
+               @endif
+               placeholder="本のタイトル、作者を検索">
                <span class="input-group-btn">
                  <button class="btn btn-secondary" type="submit">検索</button>
                </span>

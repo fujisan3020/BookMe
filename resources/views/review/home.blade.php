@@ -8,7 +8,7 @@
          <div class="row">
             <a href="{{ action('ReviewController@content', ['id' => $review->id])}}">
             <div class="col-sm-6">
-               <img src="" class="w-100" alt="本の画像">
+               <img src="{{ $review->book->image }}" class="w-100" alt="本の画像">
             </div>
             <div class="col-sm-6">
              <h2>{{ $review->book->title }}</h2>

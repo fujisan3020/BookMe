@@ -50,7 +50,7 @@
         <label for="image">本の画像</label>
         <div>
           @if(isset($form['image']))
-          <p class="review-value">{{ $form['image'] }}</p>
+          <p class="review-value">{{ basename($form['image']) }}</p>
           @else
           <p>なし</p>
           @endif

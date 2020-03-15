@@ -15,8 +15,8 @@ class ReviewController extends Controller {
    public function index(Request $request) {
      $cond_statement = $request->cond_statement;
      if ($cond_statement != '') {
-       $reviews = Review::whereHas('book', function($q) {
-         $q->where('title', $cond_statement)->orwhere('author',$cond_statement);
+       $reviews = Review::whereHas('book', function($q) use ($cond_statement) {
+         $q->where('title', $cond_statement)->orwhere('author', $cond_statement);
        })->get();
      } else {
        $reviews = Review::all();
@@ -122,9 +122,11 @@ class ReviewController extends Controller {
    public function confirm(Request $request) {
      $this->validate($request, Book::$rules);
      $this->validate($request, Review::$rules);
-     // if (!null == $request->file('image')) {
-     //   $this->validate($request, Book::$image_rules);
-     // }
+
+     if ($request->file('image') != null) {
+       $this->validate($request, Book::$image_rules);
+       \Debugbar::info($request->file('image'));
+     }
      $form = $request->all();
      unset($form['_token']);  //_tokeの削除は必須
      return view('review.confirm', ['form' => $form]);
@@ -135,12 +137,13 @@ class ReviewController extends Controller {
      $form = $request->all();
      $book = new Book;
      $review = new Review;
-     // if(!null == $request->file('image')) {
-     //    $path = $request->file('image')->store('public/image');
-     //    $book->image_path = basename($path);
-     //  } else {
-     //    $book->image_path = null;
-     //  }
+     if($request->file('image') != null) {
+        $path = $request->file('image')->store('public/image');
+        $book->image_path = basename($path);
+        \Debugbar::info($book->image_path);
+      } else {
+        $book->image_path = null;
+      }
      unset($form['image']);
      unset($form['_token']);
      $book->title = $form['title'];
