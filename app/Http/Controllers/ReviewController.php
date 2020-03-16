@@ -11,15 +11,15 @@ use App\Book;
 use App\Review;
 
 class ReviewController extends Controller {
-  //投稿レビュー一覧表示
+  //投稿レビュー一覧表示(検索結果も含める)
    public function index(Request $request) {
      $cond_statement = $request->cond_statement;
      if ($cond_statement != '') {
        $reviews = Review::whereHas('book', function($q) use ($cond_statement) {
-         $q->where('title', $cond_statement)->orwhere('author', $cond_statement);
+         $q->where('title', $cond_statement)->orwhere('author', $cond_statement)->orderBy('updated_at', 'desc');
        })->get();
      } else {
-       $reviews = Review::all();
+       $reviews = Review::orderBy('updated_at', 'desc')->get();
      }
      return view('review.home', ['reviews' => $reviews, 'cond_statement' => $cond_statement]);
    }
@@ -122,12 +122,14 @@ class ReviewController extends Controller {
    public function confirm(Request $request) {
      $this->validate($request, Book::$rules);
      $this->validate($request, Review::$rules);
-
-     if ($request->file('image') != null) {
-       $this->validate($request, Book::$image_rules);
-       \Debugbar::info($request->file('image'));
-     }
      $form = $request->all();
+
+     if (isset($form['image'])) {
+       $this->validate($request, Book::$image_rules);
+       $form['image_originalname'] = $request->image->getClientOriginalName();
+       \Debugbar::info($form['image']);
+       \Debugbar::info($form['image_originalname']);
+     }
      unset($form['_token']);  //_tokeの削除は必須
      return view('review.confirm', ['form' => $form]);
    }
@@ -137,7 +139,7 @@ class ReviewController extends Controller {
      $form = $request->all();
      $book = new Book;
      $review = new Review;
-     if($request->file('image') != null) {
+     if (isset($form['image'])) {
         $path = $request->file('image')->store('public/image');
         $book->image_path = basename($path);
         \Debugbar::info($book->image_path);
@@ -159,4 +161,14 @@ class ReviewController extends Controller {
      $review->save();
      return redirect('/');
    }
+
+   //レビュー確認ページの表示
+   // public function edit(Request $request) {
+   //  $user = Auth::user();
+   //  dd($user);
+   //  if (empty($reviews)) {
+   //       abort(404);
+   //  }
+   //  return view('review.edit', ['reviews' => $reviews]);
+   // }
 }

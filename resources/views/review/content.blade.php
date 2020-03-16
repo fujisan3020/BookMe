@@ -33,8 +33,8 @@
         <fieldse class="form-group">
           <label for="image">本の画像</label>
           <div>
-            @if(isset($review->book->image))
-            <p class="review-value">{{ $review->book->image }}</p>
+            @if(isset($review->book->image_path))
+            <p class="review-value">{{ $review->book->image_path }}</p>
             @else
             <p>なし</p>
             @endif

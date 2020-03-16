@@ -56,7 +56,7 @@
               マイページ
             </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">レビュー確認</a>
+              <a class="dropdown-item" href="{{ action('ReviewController@edit') }}">レビュー確認</a>
               <a class="dropdown-item" href="#">アカウント確認</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">ログアウト</a>

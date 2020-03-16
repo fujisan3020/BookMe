@@ -6,17 +6,6 @@
   <div class="container">
     <p><br></p>
     <h1 class="text-sm-center">レビュー内容確認</h1>
-    <form action="{{ action('ReviewController@create') }}" method="post" enctype="multipart/form-data">
-      @csrf
-      <input type="hidden" name="title" value="{{ $form['title'] }}">
-      <input type="hidden" name="genre" value="{{ $form['genre'] }}">
-      <input type="hidden" name="author" value="{{ $form['author'] }}">
-      <input type="hidden" name="publisher" value="{{ $form['publisher'] }}">
-      @if(isset($form['image']))
-      <input type="hidden" name="image" value="{{ $form['image'] }}">
-      @endif
-      <input type="hidden" name="review" value="{{ $form['review'] }}">
-      <input type="hidden" name="practice" value="{{ $form['practice'] }}">
 
       <fieldse class="form-group">
         <label for="title">本のタイトル</label>
@@ -49,8 +38,8 @@
       <fieldse class="form-group">
         <label for="image">本の画像</label>
         <div>
-          @if(isset($form['image']))
-          <p class="review-value">{{ basename($form['image']) }}</p>
+          @if(isset($form['image_originalname']))
+          <p class="review-value">{{ $form['image_originalname'] }}</p>
           @else
           <p>なし</p>
           @endif
@@ -70,7 +59,20 @@
           <p class="review-value">{{ $form['practice'] }}</p>
         </div>
       </fieldset>
-      <input class="btn btn-primary" type="submit" value="投稿">
-    </form>
+
+      <form action="{{ action('ReviewController@create') }}" method="post" enctype="multipart/form-data">
+        @csrf
+        <input type="hidden" name="title" value="{{ $form['title'] }}">
+        <input type="hidden" name="genre" value="{{ $form['genre'] }}">
+        <input type="hidden" name="author" value="{{ $form['author'] }}">
+        <input type="hidden" name="publisher" value="{{ $form['publisher'] }}">
+        @if(isset($form['image']))
+        <input type="hidden" name="image" value="{{ $form['image'] }}">
+        @endif
+        <input type="hidden" name="review" value="{{ $form['review'] }}">
+        <input type="hidden" name="practice" value="{{ $form['practice'] }}">
+
+        <input class="btn btn-primary" type="submit" value="投稿">
+      </form>
   </div>
 @endsection

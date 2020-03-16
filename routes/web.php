@@ -53,4 +53,7 @@ Route::get('/review/create', 'ReviewController@add');
 Route::post('/review/create', 'ReviewController@confirm');
 //レビュー作成・投稿
 Route::post('/review/confirm', 'ReviewController@create');
+//レビュー編集画面の表示
+Route::get('/review/edit', 'ReviewController@edit');
+
 });
