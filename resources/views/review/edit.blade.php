@@ -15,8 +15,7 @@
 
               @foreach($reviews as $review)
                 <br>
-                <h1 class="bg-danger text-sm-center">Review Number: {{ $i }}</h1>
-
+                <h1 class="bg-danger text-sm-center">Review Number : {{ $i }}</h1>
 
                 <fieldse class="form-group">
                   <label for="title">本のタイトル</label>
@@ -116,6 +115,10 @@
                   @enderror
                 </fieldset>
 
+                <button type="submit" class="btn btn-primary">レビュー編集</button>
+                <br>
+                <hr>
+
                 @php
                   $i++
                 @endphp
@@ -123,7 +126,6 @@
               @endforeach
 
 
-              <button type="submit" class="btn btn-primary">内容確認</button>
             </form>
          </div>
    </div>

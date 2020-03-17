@@ -123,15 +123,26 @@ class ReviewController extends Controller {
      $this->validate($request, Book::$rules);
      $this->validate($request, Review::$rules);
      $form = $request->all();
-     $path = null;
 
      if (isset($form['image'])) {
        $this->validate($request, Book::$image_rules);
-       $path = $request->file('image')->store('public/temp');
+
+       $temp_path = $request->file('image')->store('public/temp');
+       $read_temp_path = str_replace('public/', 'storage/', $temp_path);
+
+       $data = array(
+         'temp_path' => $temp_path,
+         'read_temp_path' => $read_temp_path,
+       );
+       $request->session()->put('data', $data);
      }
+
+     \Debugbar::info($form['image'], $data);
+
      unset($form['_token']);  //_tokeの削除は必須
      unset($form['image']);
-     return view('review.confirm', ['form' => $form, 'path' => $path]);
+     //compact関数:Controllerからviewへ変数を渡す時に、$を省略できる
+     return view('review.confirm', compact('form', 'data'));
    }
 
    //レビュー作成・投稿
@@ -143,7 +154,7 @@ class ReviewController extends Controller {
      if (isset($path)) {
         $path = $request->file('image')->store('public/public');
         $book->image_path = basename($path);
-        \Debugbar::inf($book->image_path);
+        \Debugbar::info($book->image_path);
       } else {
         $book->image_path = null;
       }
@@ -170,7 +181,6 @@ class ReviewController extends Controller {
     if (empty($reviews)) {
          abort(404);
     }
-    $number = count($reviews);
-    return view('review.edit', ['reviews' => $reviews, 'number' => $number]);
+    return view('review.edit', ['reviews' => $reviews]);
    }
 }
