@@ -123,26 +123,27 @@ class ReviewController extends Controller {
      $this->validate($request, Book::$rules);
      $this->validate($request, Review::$rules);
      $form = $request->all();
+     $path = null;
 
      if (isset($form['image'])) {
        $this->validate($request, Book::$image_rules);
-       $form['image_originalname'] = $request->image->getClientOriginalName();
-       \Debugbar::info($form['image']);
-       \Debugbar::info($form['image_originalname']);
+       $path = $request->file('image')->store('public/temp');
      }
      unset($form['_token']);  //_tokeの削除は必須
-     return view('review.confirm', ['form' => $form]);
+     unset($form['image']);
+     return view('review.confirm', ['form' => $form, 'path' => $path]);
    }
 
    //レビュー作成・投稿
    public function create(Request $request) {
      $form = $request->all();
+     dd($form);
      $book = new Book;
      $review = new Review;
-     if (isset($form['image'])) {
-        $path = $request->file('image')->store('public/image');
+     if (isset($path)) {
+        $path = $request->file('image')->store('public/public');
         $book->image_path = basename($path);
-        \Debugbar::info($book->image_path);
+        \Debugbar::inf($book->image_path);
       } else {
         $book->image_path = null;
       }
@@ -163,12 +164,13 @@ class ReviewController extends Controller {
    }
 
    //レビュー確認ページの表示
-   // public function edit(Request $request) {
-   //  $user = Auth::user();
-   //  dd($user);
-   //  if (empty($reviews)) {
-   //       abort(404);
-   //  }
-   //  return view('review.edit', ['reviews' => $reviews]);
-   // }
+   public function edit(Request $request) {
+    $reviews = Review::where('user_id', Auth::id())->get();
+    \Debugbar::info($reviews);
+    if (empty($reviews)) {
+         abort(404);
+    }
+    $number = count($reviews);
+    return view('review.edit', ['reviews' => $reviews, 'number' => $number]);
+   }
 }

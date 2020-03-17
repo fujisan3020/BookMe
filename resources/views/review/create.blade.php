@@ -106,7 +106,7 @@
                 </div>
                 @enderror
               </fieldset>
-              
+
               <button type="submit" class="btn btn-primary">内容確認</button>
             </form>
          </div>

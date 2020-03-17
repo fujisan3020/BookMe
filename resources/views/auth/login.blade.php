@@ -60,7 +60,7 @@
                                     ログイン
                                 </button>
                             </div>
-                            <div class="col-md-4 offset-md-3 mt-4">
+                            <div class="col-md-4 offset-md-4 mt-4">
                                <a href="{{ action('Auth\RegisterController@add') }}"  class="btn btn-success">アカウント作成画面へ</a>
                             </div>
                         </div>

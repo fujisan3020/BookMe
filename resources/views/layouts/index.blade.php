@@ -104,7 +104,7 @@
            <a href="{{ action('ReviewController@nature_environment') }}" class="nav-link btn-success">自然・環境</a>
          </li>
          <li class="nav-item">
-           <a href="{{ action('ReviewController@history_geography') }}" class="nav-link btn-info">歴史・地理</a>
+           <a href="{{ action('ReviewController@history_geography') }}" class="nav-link btn-info">地理・歴史</a>
          </li>
          <li class="nav-item">
            <a href="{{ action('ReviewController@culture_thought') }}" class="nav-link btn-primary">文化・思想</a>
