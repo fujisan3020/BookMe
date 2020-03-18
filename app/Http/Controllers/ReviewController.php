@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 use App\User;
 use App\Book;
@@ -148,17 +149,24 @@ class ReviewController extends Controller {
    //レビュー作成・投稿
    public function create(Request $request) {
      $form = $request->all();
-     dd($form);
      $book = new Book;
      $review = new Review;
-     if (isset($path)) {
-        $path = $request->file('image')->store('public/public');
-        $book->image_path = basename($path);
-        \Debugbar::info($book->image_path);
+     if ($request->session()->has('data')) {
+        $data = $request->session()->pull('data');
+        $temp_path = $data['temp_path'];
+        $read_temp_path = $data['read_temp_path'];
+        // unset($data['read_temp_path']);
+
+        $filename = str_replace('public/temp/', '', $temp_path);
+        $storage_path = 'public/productimage/'.$filename;
+
+        Storage::move($temp_path, $storage_path);
+
+        $read_path = str_replace('public/', 'storage/', $storage_path);
+        $book->image_path = $read_path;
       } else {
         $book->image_path = null;
       }
-     unset($form['image']);
      unset($form['_token']);
      $book->title = $form['title'];
      $book->genre = $form['genre'];
@@ -171,16 +179,22 @@ class ReviewController extends Controller {
      $review->review = $form['review'];
      $review->practice = $form['practice'];
      $review->save();
+     \Debugbar::info($book->image_path);
      return redirect('/');
    }
 
-   //レビュー確認ページの表示
-   public function edit(Request $request) {
+   //マイレビュー確認ページの表示
+   public function myreview_confirm(Request $request) {
     $reviews = Review::where('user_id', Auth::id())->get();
     \Debugbar::info($reviews);
     if (empty($reviews)) {
          abort(404);
     }
-    return view('review.edit', ['reviews' => $reviews]);
+    return view('review.myreview', ['reviews' => $reviews]);
+   }
+
+   public function edit() {
+     $reviews = Review::has('book');
+     return view('review.edit', ['reviews_form' => $reviews]);
    }
 }

@@ -21,6 +21,10 @@
       border-radius: 5px;
       border: solid thin silver;
     }
+    .myreviews {
+      border-radius: 5px;
+      border: solid thin silver;
+    }
     .error {
       margin-top: 5px;
       margin-bottom: 15px;
@@ -32,6 +36,12 @@
       border-radius: 5px;
       padding: 3px 5px;
     }
+    .review-delete {
+      margin-left: 50px;
+    }
+    /* .content_image {
+      margin: 0 0 10px 400px;
+    } */
     </style>
 
 
@@ -56,7 +66,7 @@
               マイページ
             </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="{{ action('ReviewController@edit') }}">レビュー確認</a>
+              <a class="dropdown-item" href="{{ action('ReviewController@myreview_confirm') }}">レビュー確認</a>
               <a class="dropdown-item" href="#">アカウント確認</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">ログアウト</a>

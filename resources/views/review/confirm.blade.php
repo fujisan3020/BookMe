@@ -39,7 +39,7 @@
         <label for="image">本の画像</label>
         <div>
           @if(isset($data['read_temp_path']))
-          <img src="{{ $data['read_temp_path'] }}" alt="本の画像" width="300" height="300">
+          <img src="{{ asset($data['read_temp_path']) }}" alt="本の画像" width="300" height="400">
           @else
           <p>なし</p>
           @endif
@@ -66,9 +66,6 @@
         <input type="hidden" name="genre" value="{{ $form['genre'] }}">
         <input type="hidden" name="author" value="{{ $form['author'] }}">
         <input type="hidden" name="publisher" value="{{ $form['publisher'] }}">
-        @if(isset($data))
-        <input type="hidden" name="data" value="{{ $data['read_temp_path'] }}">
-        @endif
         <input type="hidden" name="review" value="{{ $form['review'] }}">
         <input type="hidden" name="practice" value="{{ $form['practice'] }}">
 

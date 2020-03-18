@@ -14,9 +14,6 @@
               @endphp
 
               @foreach($reviews as $review)
-                <br>
-                <h1 class="bg-danger text-sm-center">Review Number : {{ $i }}</h1>
-
                 <fieldse class="form-group">
                   <label for="title">本のタイトル</label>
                   <strong class="text-danger">(必須)</strong>
@@ -80,7 +77,12 @@
                 </fieldset>
                 <fieldse class="form-group">
                   <label for="image">本の画像</label>
-                  <input type="file" id="image" class="form-control" name="image" value="{{ $review->image_path }}">
+                  <div class="form-text">
+                     設定中: {{ basename($review->book->image_path) }}
+                  </div>
+                  <img src="{{ asset($review->book->image_path) }}" alt="本の画像">
+                  <br><br>
+                  <input type="file" id="image" class="form-control" name="image">
                   @error('image')
                   <div class="error">
                     <span class="invalid-feedback" role="alert">

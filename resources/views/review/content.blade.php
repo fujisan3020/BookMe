@@ -34,7 +34,7 @@
           <label for="image">本の画像</label>
           <div>
             @if(isset($review->book->image_path))
-            <p class="review-value">{{ $review->book->image_path }}</p>
+            <img class="content_image" src="{{ $review->book->image_path }}" alt="本の画像" width="300" height="400">
             @else
             <p>なし</p>
             @endif
