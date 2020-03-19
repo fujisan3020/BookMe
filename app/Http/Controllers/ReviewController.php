@@ -136,7 +136,7 @@ class ReviewController extends Controller {
          'read_temp_path' => $read_temp_path,
        );
        $request->session()->put('data', $data);
-       \Debugbar::info($form['image'], $data);
+       // \Debugbar::info($form['image'], $data);
        return view('review.confirm', compact('form', 'data'));
      }
 
@@ -159,7 +159,7 @@ class ReviewController extends Controller {
         // unset($data['read_temp_path']);
 
         $filename = str_replace('public/temp/', '', $temp_path);
-        $storage_path = 'public/productimage/'.$filename;
+        $storage_path = 'public/bookimage/'.$filename;
 
         Storage::move($temp_path, $storage_path);
 
@@ -196,11 +196,55 @@ class ReviewController extends Controller {
    //マイレビュー編集画面の表示
    public function edit(Request $request) {
      $review = Review::where('user_id', Auth::id())->where('book_id', $request->id)->first();
+     // $review = Review::find($request->id);
      return view('review.edit', ['review_form' => $review]);
    }
 
    //マイレビュー編集
-   public function update() {
+   public function update(Request $request) {
+     $this->validate($request, Book::$rules);
+     $this->validate($request, Review::$rules);
+     $review = Review::find($request->id);
+     $book = Book::find($request->id);
+     $form = $request->all();
 
+     if ($request->file('image')) {
+       $this->validate($request, Book::$image_rules);
+       $storage_path = $request->file('image')->store('public/bookimage');
+       $read_path = str_replace('public/', 'storage/', $storage_path);
+       $book->image_path = $read_path;
+     } elseif ($request->input('remove')) {
+         $book->image_path = null;
+     } else {
+         $form['image_path'] = $book->image_path;
+         $book->image_path = $form['image_path'];
+     }
+
+     unset($form['_token']);
+     unset($form['image']);
+     unset($form['remove']);
+
+     $book->title = $form['title'];
+     $book->genre = $form['genre'];
+     $book->author = $form['author'];
+     $book->publisher = $form['publisher'];
+     $book->save();
+
+
+     $review->user_id = Auth::id();
+     $review->book_id = $book->id;
+     $review->review = $form['review'];
+     $review->practice = $form['practice'];
+     $review->save();
+     return redirect('/myreview');
+     }
+
+     //マイレビュー削除
+   public function delete(Request $request) {
+     $review = Review::find($request->id);
+     $review->delete();
+     $review->book->delete();
+     return redirect('/myreview');
    }
+
 }

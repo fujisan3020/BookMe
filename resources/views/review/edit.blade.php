@@ -77,12 +77,15 @@
                   <div class="form-text">
                      設定中: {{ basename($review_form->book->image_path) }}
                   </div>
-                  <img src="{{ asset($review_form->book->image_path) }}" alt="本の画像">
+                  <img src="{{ asset($review_form->book->image_path) }}" alt="本の画像" width="300" height="400">
+                  <br><br>
+                  <input class="form-check-input" type="checkbox" name="remove" value="true">  画像を削除
                   <br><br>
                   @else
                     <p>画像なし</p>
                   @endif
                   <input type="file" id="image" class="form-control" name="image">
+
                   @error('image')
                   <div class="error">
                     <span class="invalid-feedback" role="alert">
@@ -117,7 +120,7 @@
                   @enderror
                 </fieldset>
 
-                <button type="submit" class="btn btn-primary">編集</button>
+                <button type="submit" class="btn btn-primary">更新</button>
 
             </form>
          </div>

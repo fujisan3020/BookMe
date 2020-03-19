@@ -69,7 +69,7 @@
                 <p>更新日時: {{ $review->updated_at }}</p>
                 <div>
                   <a class="btn btn-success" href="{{ action('ReviewController@edit', ['id' => $review->book_id]) }}" role="button">レビュー編集</a>
-                  <a class="btn btn-warning review-delete" href="" role="button">レビュー削除</a>
+                  <a class="btn btn-warning review-delete" href="{{ action('ReviewController@delete', ['id' => $review->id]) }}" role="button">レビュー削除</a>
                 </div>
               </div>
               <hr>
