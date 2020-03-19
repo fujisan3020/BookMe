@@ -41,7 +41,7 @@
           @if(isset($data['read_temp_path']))
           <img src="{{ asset($data['read_temp_path']) }}" alt="本の画像" width="300" height="400">
           @else
-          <p>なし</p>
+          <p class="review-value">なし</p>
           @endif
         </div>
       </fieldset>

@@ -136,14 +136,15 @@ class ReviewController extends Controller {
          'read_temp_path' => $read_temp_path,
        );
        $request->session()->put('data', $data);
+       \Debugbar::info($form['image'], $data);
+       return view('review.confirm', compact('form', 'data'));
      }
 
-     \Debugbar::info($form['image'], $data);
 
      unset($form['_token']);  //_tokeの削除は必須
      unset($form['image']);
      //compact関数:Controllerからviewへ変数を渡す時に、$を省略できる
-     return view('review.confirm', compact('form', 'data'));
+     return view('review.confirm', compact('form'));
    }
 
    //レビュー作成・投稿
@@ -183,18 +184,23 @@ class ReviewController extends Controller {
      return redirect('/');
    }
 
-   //マイレビュー確認ページの表示
+   //マイレビュー確認画面の表示
    public function myreview_confirm(Request $request) {
     $reviews = Review::where('user_id', Auth::id())->get();
-    \Debugbar::info($reviews);
     if (empty($reviews)) {
          abort(404);
     }
     return view('review.myreview', ['reviews' => $reviews]);
    }
 
-   public function edit() {
-     $reviews = Review::has('book');
-     return view('review.edit', ['reviews_form' => $reviews]);
+   //マイレビュー編集画面の表示
+   public function edit(Request $request) {
+     $review = Review::where('user_id', Auth::id())->where('book_id', $request->id)->first();
+     return view('review.edit', ['review_form' => $review]);
+   }
+
+   //マイレビュー編集
+   public function update() {
+
    }
 }
