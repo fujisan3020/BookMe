@@ -23,4 +23,5 @@
         </div>
       </div>
     @endforeach
+    <p class="pagination">{{ $reviews->links() }}</p>
 @endsection

@@ -39,6 +39,9 @@
     .review-delete {
       margin-left: 50px;
     }
+    .pagination {
+      margin-left: 150px;
+    }
     /* .content_image {
       margin: 0 0 10px 400px;
     } */

@@ -18,9 +18,9 @@ class ReviewController extends Controller {
      if ($cond_statement != '') {
        $reviews = Review::whereHas('book', function($q) use ($cond_statement) {
          $q->where('title', $cond_statement)->orwhere('author', $cond_statement)->orderBy('updated_at', 'desc');
-       })->get();
+       })->paginate(5);
      } else {
-       $reviews = Review::orderBy('updated_at', 'desc')->get();
+       $reviews = Review::orderBy('updated_at', 'desc')->paginate(5);
      }
      return view('review.home', ['reviews' => $reviews, 'cond_statement' => $cond_statement]);
    }
@@ -29,77 +29,77 @@ class ReviewController extends Controller {
    public function business_economy() {
      $reviews = Review::whereHas('book', function($q) {
        $q->where('genre', 'ビジネス・経済');
-     })->get();
+     })->paginate(5);;
      return view('review.home', ['reviews' => $reviews]);
    }
 
    public function society_politics() {
      $reviews = Review::whereHas('book', function($q) {
        $q->where('genre', '社会・政治');
-     })->get();
+     })->paginate(5);;
      return view('review.home', ['reviews' => $reviews]);
    }
 
    public function investment_finance() {
      $reviews = Review::whereHas('book', function($q) {
        $q->where('genre', '投資・金融');
-     })->get();
+     })->paginate(5);;
      return view('review.home', ['reviews' => $reviews]);
    }
 
    public function nature_environment() {
      $reviews = Review::whereHas('book', function($q) {
        $q->where('genre', '自然・環境');
-     })->get();
+     })->paginate(5);;
      return view('review.home', ['reviews' => $reviews]);
    }
 
    public function history_geography() {
      $reviews = Review::whereHas('book', function($q) {
        $q->where('genre', '歴史・地理');
-     })->get();
+     })->paginate(5);;
      return view('review.home', ['reviews' => $reviews]);
    }
 
    public function culture_thought() {
      $reviews = Review::whereHas('book', function($q) {
        $q->where('genre', '文化・思想');
-     })->get();
+     })->paginate(5);;
      return view('review.home', ['reviews' => $reviews]);
    }
 
    public function education_selfdevelopment() {
      $reviews = Review::whereHas('book', function($q) {
        $q->where('genre', '教育・自己啓発');
-     })->get();
+     })->paginate(5);;
      return view('review.home', ['reviews' => $reviews]);
    }
 
    public function science_technology() {
      $reviews = Review::whereHas('book', function($q) {
        $q->where('genre', '科学・テクノロジー');
-     })->get();
+     })->paginate(5);;
      return view('review.home', ['reviews' => $reviews]);
    }
 
    public function travel() {
      $reviews = Review::whereHas('book', function($q) {
        $q->where('genre', '旅行・紀行');
-     })->get();
+     })->paginate(5);;
      return view('review.home', ['reviews' => $reviews]);
    }
 
    public function sports_outdoor() {
      $reviews = Review::whereHas('book', function($q) {
        $q->where('genre', 'スポーツ・アウトドア');
-     })->get();
+     })->paginate(5);;
      return view('review.home', ['reviews' => $reviews]);
    }
 
    public function other() {
      $reviews = Review::whereHas('book', function($q) {
        $q->where('genre', 'その他');
-     })->get();
+     })->paginate(5);;
      return view('review.home', ['reviews' => $reviews]);
    }
 
@@ -186,7 +186,7 @@ class ReviewController extends Controller {
 
    //マイレビュー確認画面の表示
    public function myreview_confirm(Request $request) {
-    $reviews = Review::where('user_id', Auth::id())->get();
+    $reviews = Review::where('user_id', Auth::id())->paginate(5);;
     return view('review.myreview', ['reviews' => $reviews]);
    }
 
