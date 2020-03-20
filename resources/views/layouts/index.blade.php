@@ -69,7 +69,7 @@
               <a class="dropdown-item" href="{{ action('ReviewController@myreview_confirm') }}">レビュー確認</a>
               <a class="dropdown-item" href="#">アカウント確認</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">ログアウト</a>
+              <a class="dropdown-item" href="{{ action('UserController@logout') }}">ログアウト</a>
             </div>
           </div>
        </div>

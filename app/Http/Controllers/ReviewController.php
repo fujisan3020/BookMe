@@ -104,7 +104,7 @@ class ReviewController extends Controller {
    }
 
 
-   //レビューー内容の表示
+   //レビュー内容の表示
    public function content(Request $request) {
      $review = Review::find($request->id);
      if (empty($review)) {
@@ -187,9 +187,6 @@ class ReviewController extends Controller {
    //マイレビュー確認画面の表示
    public function myreview_confirm(Request $request) {
     $reviews = Review::where('user_id', Auth::id())->get();
-    if (empty($reviews)) {
-         abort(404);
-    }
     return view('review.myreview', ['reviews' => $reviews]);
    }
 

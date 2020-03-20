@@ -64,4 +64,9 @@ Route::group(['middleware' => 'auth'], function() {
   //マイレビュー削除
   Route::get('/myreview/delete', 'ReviewController@delete');
 
+
+  //ログアウト処理
+  Route::get('/logout', 'UserController@logout');
+
+
 });

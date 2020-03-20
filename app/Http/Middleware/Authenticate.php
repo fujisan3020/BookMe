@@ -15,7 +15,7 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-          //↓のloginを名前付きルートに設定すると、ミドルウェアがユーザーを
+          //↓のloginを名前付きルートに設定すると、ミドルウェアが未認証ユーザーを
           //そのルートへリダイレクトする。
             return route('login');
         }

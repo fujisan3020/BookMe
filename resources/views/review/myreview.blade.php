@@ -69,7 +69,13 @@
                     <p class="review-value">{{ $review->user->name }}</p>
                   </div>
                 </fieldset>
-                <p>更新日時: {{ $review->updated_at }}</p>
+                <p>更新日時: 
+                @if ($review->updated_at > $review->book->updated_at)
+                  {{ $review->updated_at }}
+                @else
+                  {{ $review->book->updated_at }}
+                </p>
+                @endif
                 <div>
                   <a class="btn btn-success" href="{{ action('ReviewController@edit', ['id' => $review->id]) }}" role="button">レビュー編集</a>
                   <a class="btn btn-warning review-delete" href="{{ action('ReviewController@delete', ['id' => $review->id]) }}" role="button">レビュー削除</a>
