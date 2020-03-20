@@ -195,7 +195,7 @@ class ReviewController extends Controller {
 
    //マイレビュー編集画面の表示
    public function edit(Request $request) {
-     $review = Review::where('user_id', Auth::id())->where('book_id', $request->id)->first();
+     $review = Review::where('user_id', Auth::id())->where('id', $request->id)->first();
      // $review = Review::find($request->id);
      return view('review.edit', ['review_form' => $review]);
    }
@@ -205,7 +205,7 @@ class ReviewController extends Controller {
      $this->validate($request, Book::$rules);
      $this->validate($request, Review::$rules);
      $review = Review::find($request->id);
-     $book = Book::find($request->id);
+     $book = Book::find($review->book_id);
      $form = $request->all();
 
      if ($request->file('image')) {
