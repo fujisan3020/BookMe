@@ -1,6 +1,6 @@
 @extends('layouts.index')
 
-@section('title', 'レビュー 一覧')
+@section('title', 'レビュー内容確認')
 
 @section('content')
       <p><br></p>

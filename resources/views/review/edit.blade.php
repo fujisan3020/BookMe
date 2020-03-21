@@ -1,6 +1,6 @@
 @extends('layouts.index')
 
-@section('title', 'レビュー編集')
+@section('title', 'マイレビュー編集')
 
 @section('content')
    <div class="container">

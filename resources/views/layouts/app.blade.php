@@ -32,9 +32,7 @@
     </style>
 </head>
 <body>
-  @guest
 
-  @endguest
         <main class="py-4">
             @yield('content')
         </main>

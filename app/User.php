@@ -10,6 +10,12 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public static $rules = array(
+      'name' => ['required', 'string', 'max:255'],
+      'email' => ['required', 'string', 'email', 'max:255'],
+      'password' => ['required', 'string', 'regex:/^(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]{8,}$/', 'confirmed', 'unique:users'],
+    );
+
     /**
      * The attributes that are mass assignable.
      *
@@ -36,6 +42,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 
     // public function review() {
     //   return $this->hasMany('App\Review');

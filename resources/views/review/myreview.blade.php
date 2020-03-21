@@ -1,6 +1,6 @@
 @extends('layouts.index')
 
-@section('title', 'レビュー確認')
+@section('title', 'マイレビュー 一覧')
 
 @section('content')
            <p><br></p>
@@ -69,7 +69,7 @@
                     <p class="review-value">{{ $review->user->name }}</p>
                   </div>
                 </fieldset>
-                <p>更新日時: 
+                <p>更新日時:
                 @if ($review->updated_at > $review->book->updated_at)
                   {{ $review->updated_at }}
                 @else

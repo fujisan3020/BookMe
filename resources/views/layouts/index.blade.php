@@ -37,10 +37,16 @@
       padding: 3px 5px;
     }
     .review-delete {
-      margin-left: 50px;
+      margin-left: 60px;
     }
     .pagination {
       margin-left: 150px;
+    }
+    .myaccount-processing-btn {
+      margin-left: 275px;
+    }
+    .myaccount-delete-btn {
+      margin-left: 60px;
     }
     /* .content_image {
       margin: 0 0 10px 400px;
@@ -70,7 +76,7 @@
             </button>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="{{ action('ReviewController@myreview_confirm') }}">レビュー確認</a>
-              <a class="dropdown-item" href="#">アカウント確認</a>
+              <a class="dropdown-item" href="{{ action('UserController@myaccount_confirm') }}">アカウント確認・編集</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="{{ action('UserController@logout') }}">ログアウト</a>
             </div>

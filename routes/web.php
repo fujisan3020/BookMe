@@ -65,6 +65,12 @@ Route::group(['middleware' => 'auth'], function() {
   Route::get('/myreview/delete', 'ReviewController@delete');
 
 
+  //マイアカウント表示
+  Route::get('/myaccount', 'UserController@myaccount_confirm');
+  //マイアカウント更新
+  Route::post('/myaccount', 'UserController@update');
+
+
   //ログアウト処理
   Route::get('/logout', 'UserController@logout');
 
