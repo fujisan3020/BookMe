@@ -69,6 +69,8 @@ Route::group(['middleware' => 'auth'], function() {
   Route::get('/myaccount', 'UserController@myaccount_confirm');
   //マイアカウント更新
   Route::post('/myaccount', 'UserController@update');
+  //マイアカウント削除
+  Route::get('/myaccount/delete', 'UserController@delete');
 
 
   //ログアウト処理

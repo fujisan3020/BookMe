@@ -77,8 +77,8 @@
                   更新
                 </button>
 
-                <a class="btn btn-warning myaccount-delete-btn" href="#" role="button">削除</a>
-                
+                <a class="btn btn-warning myaccount-delete-btn" href="{{ action('UserController@delete') }}" role="button">削除</a>
+
               </div>
             </div>
           </form>

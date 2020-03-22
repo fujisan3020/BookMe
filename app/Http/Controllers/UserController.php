@@ -25,6 +25,12 @@ class UserController extends Controller {
       return redirect('/myreview');
     }
 
+    public function delete() {
+      Auth::user()->delete();
+      return redirect('/login');
+    }
+
+
     public function logout() {
       Auth::logout();
       return redirect('/login');
