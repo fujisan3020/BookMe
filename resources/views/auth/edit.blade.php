@@ -1,10 +1,4 @@
 @extends('layouts.index')
-<style media="screen">
-  .invalid-feedback {
-    font-size: 18px;
-    color: red;
-  }
-</style>
 
 @section('title', 'マイアカウント')
 

@@ -10,7 +10,7 @@ use App\User;
 
 class UserController extends Controller {
 
-    public function myaccount_confirm() {
+    public function show() {
       $user = Auth::user();
       return view('auth.edit', ['user' => $user]);
     }

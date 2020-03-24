@@ -48,6 +48,16 @@
     .myaccount-delete-btn {
       margin-left: 60px;
     }
+    .service-description {
+      font-size: 20px;
+    }
+    .row {
+      padding: 20px;
+    }
+    .invalid-feedback {
+      font-size: 18px;
+      color: red;
+    }
     /* .content_image {
       margin: 0 0 10px 400px;
     } */
@@ -75,8 +85,8 @@
               マイページ
             </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="{{ action('ReviewController@myreview_confirm') }}">レビュー確認</a>
-              <a class="dropdown-item" href="{{ action('UserController@myaccount_confirm') }}">アカウント確認・編集</a>
+              <a class="dropdown-item" href="{{ action('ReviewController@myreview_show') }}">レビュー表示</a>
+              <a class="dropdown-item" href="{{ action('UserController@show') }}">アカウント表示</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="{{ action('UserController@logout') }}">ログアウト</a>
             </div>
@@ -87,6 +97,8 @@
           <h1><a class="display-4" href="{{ action('ReviewController@index') }}">
             <small><small><small>あなたの気づきを価値あるものに。</small></small></small><br>
             <big><big>BookMe</big></big></a></h1>
+            <p class="service-description">< 明日からできる実践知識提供サービス ></p>
+
        </div>
 
 
@@ -99,7 +111,7 @@
                @if (isset($cond_statement))
                  value="{{ $cond_statement }}"
                @endif
-               placeholder="本のタイトル、作者を検索">
+               placeholder="レビュー投稿された本のタイトル、本の作者を検索">
                <span class="input-group-btn">
                  <button class="btn btn-secondary" type="submit">検索</button>
                </span>
@@ -155,7 +167,22 @@
 
     </main>
 
-
+    <br>
+    <a href="https://www.amazon.co.jp/" class="alert-link">
+    <div class="alert alert-danger container text-sm-center" role="alert">
+      amazonで本を検索・購入する
+    </div>
+    </a>
+    <a href="https://www.rakuten.co.jp/" class="alert-link">
+    <div class="alert alert-warning container text-sm-center" role="alert">
+      楽天市場で本を検索・購入する
+    </div>
+    </a>
+    <a href="https://www.mercari.com/jp/" class="alert-link">
+    <div class="alert alert-info container text-sm-center" role="alert">
+      メルカリで本を購入する
+    </div>
+    </a>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>

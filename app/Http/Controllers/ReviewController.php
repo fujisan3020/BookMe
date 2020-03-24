@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use App\User;
 use App\Book;
 use App\Review;
+use App\Helpful;
 
 class ReviewController extends Controller {
   //投稿レビュー一覧表示(検索結果も含める)
@@ -17,7 +18,7 @@ class ReviewController extends Controller {
      $cond_statement = $request->cond_statement;
      if ($cond_statement != '') {
        $reviews = Review::whereHas('book', function($q) use ($cond_statement) {
-         $q->where('title', $cond_statement)->orwhere('author', $cond_statement)->orderBy('updated_at', 'desc');
+         $q->where('title', 'like', '%'.$cond_statement.'%')->orwhere('author', 'like',  '%'.$cond_statement.'%')->orderBy('updated_at', 'desc');
        })->paginate(5);
      } else {
        $reviews = Review::orderBy('updated_at', 'desc')->paginate(5);
@@ -185,7 +186,7 @@ class ReviewController extends Controller {
    }
 
    //マイレビュー確認画面の表示
-   public function myreview_confirm(Request $request) {
+   public function myreview_show(Request $request) {
     $reviews = Review::where('user_id', Auth::id())->paginate(5);;
     return view('review.myreview', ['reviews' => $reviews]);
    }

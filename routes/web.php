@@ -46,6 +46,9 @@ Route::group(['middleware' => 'auth'], function() {
   //レビュー内容の表示
   Route::get('/content', 'ReviewController@content');
 
+  //役に立ったボタンへの投票と取り消し
+
+
 
   //レビュー作成画面の表示
   Route::get('/review/create', 'ReviewController@add');
@@ -56,7 +59,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 
   //マイレビュー画面の表示
-  Route::get('/myreview', 'ReviewController@myreview_confirm');
+  Route::get('/myreview', 'ReviewController@myreview_show');
   //マイレビュー編集画面の表示
   Route::get('/myreview/edit', 'ReviewController@edit');
   //マイレビュー更新
@@ -66,7 +69,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 
   //マイアカウント表示
-  Route::get('/myaccount', 'UserController@myaccount_confirm');
+  Route::get('/myaccount', 'UserController@show');
   //マイアカウント更新
   Route::post('/myaccount', 'UserController@update');
   //マイアカウント削除
