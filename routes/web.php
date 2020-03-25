@@ -47,15 +47,15 @@ Route::group(['middleware' => 'auth'], function() {
   Route::get('/content', 'ReviewController@content');
 
   //役に立ったボタンへの投票と取り消し
-
-
+  Route::get('/content/helpfuls', 'HelpfulController@store');
+  Route::post('/content/helpfuls/off', 'HelpfulController@destroy');
 
   //レビュー作成画面の表示
-  Route::get('/review/create', 'ReviewController@add');
+  Route::get('/review/create', 'ReviewController@create');
   //入力されたレビューの確認
   Route::post('/review/create', 'ReviewController@confirm');
   //レビュー作成・投稿
-  Route::post('/review/confirm', 'ReviewController@create');
+  Route::post('/review/confirm', 'ReviewController@store');
 
 
   //マイレビュー画面の表示
@@ -74,8 +74,6 @@ Route::group(['middleware' => 'auth'], function() {
   Route::post('/myaccount', 'UserController@update');
   //マイアカウント削除
   Route::get('/myaccount/delete', 'UserController@delete');
-
-
   //ログアウト処理
   Route::get('/logout', 'UserController@logout');
 

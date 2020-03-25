@@ -22,14 +22,14 @@ class Review extends Model {
       return $this->belongsTo('App\Book');
     }
 
-    // public function helpful() {
-    //   return $this->belongsTo('App\Helpful');
-    // }
-    //
-    //
-    // public function like_by() {
-    //   return Helpful::where('user_id', Auth::id())->first();
-    // }
+    public function helpfuls() {
+      return $this->hasMany('App\Helpful');
+    }
+
+
+    public function helpful_by() {
+      return Helpful::where('user_id', Auth::id())->first();
+    }
 
 
 }

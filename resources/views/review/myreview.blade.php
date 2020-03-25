@@ -1,11 +1,11 @@
 @extends('layouts.index')
 
-@section('title', 'マイレビュー 一覧')
+@section('title', 'マイレビュー')
 
 @section('content')
            <p><br></p>
            <div class="text-sm-center">
-             <h1>レビュー確認</h1>
+             <h1>マイレビュー</h1>
            </div>
 
            @php

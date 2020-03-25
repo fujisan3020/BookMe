@@ -16,7 +16,7 @@ class CreateHelpfulsTable extends Migration
         Schema::create('helpfuls', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id');
-            $table->integer('book_id');
+            $table->integer('review_id');
             $table->timestamps();
         });
     }

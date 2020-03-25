@@ -13,13 +13,13 @@ class User extends Authenticatable
     use Notifiable;
     use softDeletes;
 
-    protected $guarded = array('id');
-
     public static $rules = array(
       'name' => ['required', 'string', 'max:255'],
       'email' => ['required', 'string', 'email', 'max:255'],
       'password' => ['required', 'string', 'regex:/^(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]{8,}$/', 'confirmed', 'unique:users'],
     );
+
+    protected $guarded = array('id');
 
     /**
      * The attributes that are mass assignable.
@@ -51,7 +51,7 @@ class User extends Authenticatable
     protected $dates = ['deleted_at'];
 
 
-    // public function review() {
-    //   return $this->hasMany('App\Review');
-    // }
+    public function helpfuls() {
+      return $this->hasMany('App\Helpful');
+    }
 }

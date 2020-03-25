@@ -9,9 +9,8 @@
       <div class="container">
         <br>
         <div class="text-sm-center">
-          <h2>アカウント確認・編集</h2>
+          <h2>マイアカウント</h2>
         </div>
-        <br>
         <div>
           <form method="POST" action="">
             @csrf

@@ -60,7 +60,7 @@
         </div>
       </fieldset>
 
-      <form action="{{ action('ReviewController@create') }}" method="post" enctype="multipart/form-data">
+      <form action="{{ action('ReviewController@store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="title" value="{{ $form['title'] }}">
         <input type="hidden" name="genre" value="{{ $form['genre'] }}">

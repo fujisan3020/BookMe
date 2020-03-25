@@ -9,12 +9,20 @@ class Helpful extends Model {
 
     use CounterCache;
 
-    // public $CounterCacheOptions = [
-    //   'Review' => [
-    //     'field' => 'like_count',
-    //     'foreignKey' => 'book_id',
-    //   ]
-    // ];
-    //
-    // protected $fillable = ['user_id', 'book_id'];
+    public $CounterCacheOptions = [
+      'Review' => [
+        'field' => 'helpfuls_count',
+        'foreignKey' => 'review_id',
+      ]
+    ];
+
+    protected $fillable = ['user_id', 'book_id'];
+
+    public function user() {
+      return $this->belongsTo('App\User');
+    }
+
+    public function review() {
+      return $this->belongsTo('App\Review');
+    }
 }

@@ -14,7 +14,7 @@ class AddColumnsToReviewsTable extends Migration
     public function up()
     {
         Schema::table('reviews', function (Blueprint $table) {
-            $table->integer('helpful_count')->default(0);
+            $table->integer('helpfuls_count')->default(0);
         });
     }
 

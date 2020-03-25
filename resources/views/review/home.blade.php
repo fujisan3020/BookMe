@@ -7,7 +7,7 @@
     @foreach($reviews as $review)
       <div class="container reviews">
         <div class="row">
-            <a href="{{ action('ReviewController@content', ['id' => $review->id])}}">
+            <a href="{{ action('ReviewController@content', ['id' => $review->id]) }}">
             <div class="col-lg-2 col-lg-offset-1  col-sm-4">
                <img src="{{ $review->book->image_path }}" alt="本の画像" width="250" height="350">
             </div>

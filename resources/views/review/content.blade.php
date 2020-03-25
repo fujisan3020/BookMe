@@ -59,4 +59,23 @@
           </div>
         </fieldset>
       </div>
+
+      @if (Auth::check())
+    @if ($helpful)
+      {{ Form::model($review, array('action' => array('HelpfulController@destroy', $review->id, $helpful->id))) }}
+        <button type="submit">
+          <img src="/images/icon_heart_red.svg">
+          Helpful {{ $review->helpfuls_count }}
+        </button>
+      {!! Form::close() !!}
+    @else
+      {{ Form::model($post, array('action' => array('HelpfulController@store', $review->id))) }}
+        <button type="submit">
+          <img src="/images/icon_heart.svg">
+          Helpful {{ $review->helpfuls_count }}
+        </button>
+      {!! Form::close() !!}
+    @endif
+  @endif
+
 @endsection
