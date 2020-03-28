@@ -58,24 +58,11 @@
             <p class="review-value">{{ $review->user->name }}</p>
           </div>
         </fieldset>
-      </div>
 
-      @if (Auth::check())
-    @if ($helpful)
-      {{ Form::model($review, array('action' => array('HelpfulController@destroy', $review->id, $helpful->id))) }}
-        <button type="submit">
-          <img src="/images/icon_heart_red.svg">
-          Helpful {{ $review->helpfuls_count }}
-        </button>
-      {!! Form::close() !!}
-    @else
-      {{ Form::model($post, array('action' => array('HelpfulController@store', $review->id))) }}
-        <button type="submit">
-          <img src="/images/icon_heart.svg">
-          Helpful {{ $review->helpfuls_count }}
-        </button>
-      {!! Form::close() !!}
-    @endif
-  @endif
+           <a class="btn btn-primary" href="{{ action('HelpfulController@delete', ['id' => $review->id]) }}" role="button">役に立った 投票済み</a>
+
+          <a class="btn btn-primary" href="{{ action('HelpfulController@create', ['id' => $review->id]) }}" role="button">役に立った <i class="fas fa-flag"></i></a>
+
+      </div>
 
 @endsection

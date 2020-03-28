@@ -47,8 +47,8 @@ Route::group(['middleware' => 'auth'], function() {
   Route::get('/content', 'ReviewController@content');
 
   //役に立ったボタンへの投票と取り消し
-  Route::get('/content/helpfuls', 'HelpfulController@store');
-  Route::post('/content/helpfuls/off', 'HelpfulController@destroy');
+  Route::get('/content/helpful/create', 'HelpfulController@create');
+  Route::get('/content/helpful/delete', 'HelpfulController@delete');
 
   //レビュー作成画面の表示
   Route::get('/review/create', 'ReviewController@create');

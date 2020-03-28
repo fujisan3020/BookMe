@@ -10,22 +10,20 @@ use Auth;
 use App\Review;
 
 class HelpfulController extends Controller {
-  public function store(Request $request, $reviewId) {
-    Helpful::create(
-      array(
-        'user_id' => Auth::id(),
-        'review_id' => $reviewId,
-      )
-    );
-
-    $review = Review::findOrFail($reviewId);
-    return redirect()->action('ReviewController@content', $review->id);
+  public function create(Request $request) {
+    $helpful = new Helpful;
+    $helpful->user_id = Auth::id();
+    $helpful->review_id = $request->id;
+    $helpful->save();
+    dd($helpful);
+    $helpful = Helpful::where('user_id', Auth::id())->where('review_id', $request->id)->first();
+    return redirect('/content')->with('helpful', $helpful);
   }
 
-  public function destroy($reviewId, $helpfulId) {
-    $review = Review::findOrFail($reviewId);
-    $review->like_by()->findOrFail($helpfulId)->delete();
-    return redirect()->action('ReviewController@content', $review->id);
+  public function delete(Request $request) {
+    $helpful = Helpful::where('user_id', Auth::id())->where('review_id', $request->id)->first();
+    $helpful->delete();
+    return redirect('/content');
   }
 
 }

@@ -73,6 +73,7 @@ class ReviewController extends Controller {
      $reviews = Review::whereHas('book', function($q) {
        $q->where('genre', '教育・自己啓発');
      })->paginate(5);
+    dump($reviews);
      return view('review.home', ['reviews' => $reviews]);
    }
 
@@ -104,17 +105,14 @@ class ReviewController extends Controller {
      return view('review.home', ['reviews' => $reviews]);
    }
 
-
    //レビュー内容の表示
-   public function content($id) {
-     $review = Review::findOrFail($id);
-     // $review = Review::find($request->id);
-     // if (empty($review)) {
-     //      abort(404);
-     // }
-     $helpful = $review->helpfuls->where('user_id', Auth::id())->first();
-
-    return view('review.content',['review' => $review, 'helpful' => $helpful]);
+   public function content(Request $request) {
+     $review = Review::find($request->id);
+     if (empty($review)) {
+          abort(404);
+     }
+    \Debugbar::info($review);
+    return view('review.content',['review' => $review]);
    }
 
 
@@ -192,6 +190,7 @@ class ReviewController extends Controller {
    //マイレビュー表示画面の表示
    public function myreview_show(Request $request) {
     $reviews = Review::where('user_id', Auth::id())->paginate(5);
+    \Debugbar::info($reviews);
     return view('review.myreview', ['reviews' => $reviews]);
    }
 
@@ -199,6 +198,7 @@ class ReviewController extends Controller {
    public function edit(Request $request) {
      // $review = Review::where('user_id', Auth::id())->where('id', $request->id)->first();
      $review = Review::find($request->id);
+     \Debugbar::info($review);
      return view('review.edit', ['review_form' => $review]);
    }
 

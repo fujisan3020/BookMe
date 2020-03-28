@@ -18,6 +18,7 @@ class Helpful extends Model {
 
     protected $fillable = ['user_id', 'book_id'];
 
+
     public function user() {
       return $this->belongsTo('App\User');
     }
