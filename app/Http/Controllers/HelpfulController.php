@@ -15,7 +15,7 @@ class HelpfulController extends Controller {
     $helpful->user_id = Auth::id();
     $helpful->review_id = $request->id;
     $helpful->save();
-    dd($helpful);
+    dump($helpful);
     $helpful = Helpful::where('user_id', Auth::id())->where('review_id', $request->id)->first();
     return redirect('/content')->with('helpful', $helpful);
   }

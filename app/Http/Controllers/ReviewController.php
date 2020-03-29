@@ -18,10 +18,10 @@ class ReviewController extends Controller {
      $cond_statement = $request->cond_statement;
      if ($cond_statement != '') {
        $reviews = Review::whereHas('book', function($q) use ($cond_statement) {
-         $q->where('title', 'like', '%'.$cond_statement.'%')->orwhere('author', 'like',  '%'.$cond_statement.'%')->orderBy('updated_at', 'desc');
+         $q->where('title', 'like', '%'.$cond_statement.'%')->orwhere('author', 'like',  '%'.$cond_statement.'%')->orderByDesc('updated_at');
        })->paginate(5);
      } else {
-       $reviews = Review::with('book')->orderBy('updated_at', 'desc')->paginate(5);
+       $reviews = Review::with('book')->orderByDesc('updated_at')->paginate(5);
      }
      return view('review.home', ['reviews' => $reviews, 'cond_statement' => $cond_statement]);
    }
@@ -73,7 +73,6 @@ class ReviewController extends Controller {
      $reviews = Review::whereHas('book', function($q) {
        $q->where('genre', '教育・自己啓発');
      })->paginate(5);
-    dump($reviews);
      return view('review.home', ['reviews' => $reviews]);
    }
 
