@@ -59,10 +59,12 @@
           </div>
         </fieldset>
 
+          @if ($review->helpfuls->where('user_id', Auth::id())->first() != null)
            <a class="btn btn-primary" href="{{ action('HelpfulController@delete', ['id' => $review->id]) }}" role="button">役に立った 投票済み</a>
-
+          @else
           <a class="btn btn-primary" href="{{ action('HelpfulController@create', ['id' => $review->id]) }}" role="button">役に立った <i class="fas fa-flag"></i></a>
-
+          @endif
+          <p>{{ $review->helpfuls->count() }}</p>
       </div>
 
 @endsection

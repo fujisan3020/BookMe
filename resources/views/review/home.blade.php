@@ -4,11 +4,11 @@
 
 </style>
 @section('content')
-  <div class="container reviews">
+  <div class="container">
     <div class="row">
       @foreach($reviews as $review)
         <a class="col-lg-6 col-sm" href="{{ action('ReviewController@content', ['id' => $review->id]) }}" style="max-height: 400px;">
-          <div class="row">
+          <div class="row reviews">
             <div class="col-lg-6 col-sm-6">
               <img src="{{ $review->book->image_path }}" alt="本の画像" width="250" height="350">
             </div>

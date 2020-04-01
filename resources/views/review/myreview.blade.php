@@ -89,5 +89,5 @@
             @endphp
 
           @endforeach
-
+          <p class="pagination">{{ $reviews->links() }}</p>
 @endsection

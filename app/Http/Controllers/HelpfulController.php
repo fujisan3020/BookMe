@@ -15,15 +15,13 @@ class HelpfulController extends Controller {
     $helpful->user_id = Auth::id();
     $helpful->review_id = $request->id;
     $helpful->save();
-    dump($helpful);
-    $helpful = Helpful::where('user_id', Auth::id())->where('review_id', $request->id)->first();
-    return redirect('/content')->with('helpful', $helpful);
+    return back();
   }
 
   public function delete(Request $request) {
     $helpful = Helpful::where('user_id', Auth::id())->where('review_id', $request->id)->first();
     $helpful->delete();
-    return redirect('/content');
+    return back();
   }
 
 }
