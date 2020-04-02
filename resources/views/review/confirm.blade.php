@@ -39,7 +39,7 @@
         <label for="image">本の画像</label>
         <div>
           @if(isset($data['read_temp_path']))
-          <img src="{{ asset($data['read_temp_path']) }}" alt="本の画像" width="300" height="400">
+          <img src="{{ $data['read_temp_path'] }}" alt="本の画像" width="300" height="400">
           @else
           <p class="review-value">なし</p>
           @endif

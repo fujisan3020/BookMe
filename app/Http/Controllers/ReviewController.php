@@ -129,7 +129,8 @@ class ReviewController extends Controller {
      if (isset($form['image'])) {
        $this->validate($request, Book::$image_rules);
 
-       $temp_path = $request->file('image')->store('public/temp');
+       // $temp_path = $request->file('image')->store('public/temp');
+       $temp_path = Storage::disk('s3')->putFile('/', $form['image'], 'public');
        $read_temp_path = str_replace('public/', 'storage/', $temp_path);
 
        $data = array(
@@ -165,7 +166,8 @@ class ReviewController extends Controller {
         Storage::move($temp_path, $storage_path);
 
         $read_path = str_replace('public/', 'storage/', $storage_path);
-        $book->image_path = $read_path;
+        // $book->image_path = $read_path;
+        $book->image_path = Storage::dist('s3')->url($read_path);
       } else {
         $book->image_path = null;
       }
