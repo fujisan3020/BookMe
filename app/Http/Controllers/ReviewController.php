@@ -110,7 +110,7 @@ class ReviewController extends Controller {
      if (empty($review)) {
           abort(404);
      }
-    \Debugbar::info($review);
+    // \Debugbar::info($review);
     return view('review.content',['review' => $review]);
    }
 
