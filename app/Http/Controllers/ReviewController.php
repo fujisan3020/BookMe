@@ -191,7 +191,7 @@ class ReviewController extends Controller {
    //マイレビュー表示画面の表示
    public function myreview_show(Request $request) {
     $reviews = Review::where('user_id', Auth::id())->paginate(6);
-    \Debugbar::info($reviews);
+    // \Debugbar::info($reviews);
     return view('review.myreview', ['reviews' => $reviews]);
    }
 
@@ -199,7 +199,7 @@ class ReviewController extends Controller {
    public function edit(Request $request) {
      // $review = Review::where('user_id', Auth::id())->where('id', $request->id)->first();
      $review = Review::find($request->id);
-     \Debugbar::info($review);
+     // \Debugbar::info($review);
      return view('review.edit', ['review_form' => $review]);
    }
 
