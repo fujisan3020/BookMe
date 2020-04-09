@@ -110,6 +110,8 @@ class ReviewController extends Controller {
      if (empty($review)) {
           abort(404);
      }
+    // 本番環境ではデバッグバーは削除、またはコメントアウトしておかないと
+    // エラーが発生する
     // \Debugbar::info($review);
     return view('review.content',['review' => $review]);
    }
