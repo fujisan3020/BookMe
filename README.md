@@ -1,5 +1,4 @@
-Name
-Bookme
+Name  Bookme
 
 ## About Laravel
 
