@@ -132,9 +132,9 @@ class ReviewController extends Controller {
        $this->validate($request, Book::$image_rules);
 
        $path = Storage::disk('s3')->putFile('/', $form['image'], 'public');
-       // $read_path = Storage::disk('s3')->url($path);
+       $read_path = Storage::disk('s3')->url($path);
 
-       return view('review.confirm', compact('form', 'path'));
+       return view('review.confirm', compact('form', 'read_path'));
 
        // 開発環境での処理
        // $temp_path = $request->file('image')->store('public/temp');

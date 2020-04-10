@@ -38,8 +38,8 @@
       <fieldse class="form-group">
         <label for="image">本の画像</label>
         <div>
-          @if(isset($path))
-          <img src="{{ $path }}" alt="本の画像" width="300" height="400">
+          @if(isset($read_path))
+          <img src="{{ $read_path }}" alt="本の画像" width="300" height="400">
           @else
           <p class="review-value">なし</p>
           @endif
