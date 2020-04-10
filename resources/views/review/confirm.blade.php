@@ -66,7 +66,7 @@
         <input type="hidden" name="genre" value="{{ $form['genre'] }}">
         <input type="hidden" name="author" value="{{ $form['author'] }}">
         <input type="hidden" name="publisher" value="{{ $form['publisher'] }}">
-        @if ($read_path)
+        @if (isset($read_path))
           <input type="hidden" name="read_path" value="{{ $read_path }}">
         @endif
         <input type="hidden" name="review" value="{{ $form['review'] }}">
