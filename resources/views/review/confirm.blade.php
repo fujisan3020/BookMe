@@ -38,8 +38,8 @@
       <fieldse class="form-group">
         <label for="image">本の画像</label>
         <div>
-          @if(isset($data['read_temp_path']))
-          <img src="{{ asset($data['read_temp_path']) }}" alt="本の画像" width="300" height="400">
+          @if(isset($read_path))
+          <img src="{{ $read_path }}" alt="本の画像" width="300" height="400">
           @else
           <p class="review-value">なし</p>
           @endif
@@ -66,6 +66,9 @@
         <input type="hidden" name="genre" value="{{ $form['genre'] }}">
         <input type="hidden" name="author" value="{{ $form['author'] }}">
         <input type="hidden" name="publisher" value="{{ $form['publisher'] }}">
+        @if ($read_path)
+          <input type="hidden" name="read_path" value="{{ $read_path }}">
+        @endif
         <input type="hidden" name="review" value="{{ $form['review'] }}">
         <input type="hidden" name="practice" value="{{ $form['practice'] }}">
 

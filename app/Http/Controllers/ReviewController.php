@@ -131,19 +131,22 @@ class ReviewController extends Controller {
      if (isset($form['image'])) {
        $this->validate($request, Book::$image_rules);
 
-       $temp_path = $request->file('image')->store('public/temp');
-       // $temp_path = Storage::disk('s3')->putFile('/', $form['image'], 'public');
-       $read_temp_path = str_replace('public/', 'storage/', $temp_path);
+       $path = Storage::disk('s3')->putFile('/', $form['image'], 'public');
+       $read_path = Storage::disk('s3')->url($path);
+       return view('review.confirm', compact('form', 'read_path'));
 
-       $data = array(
-         'temp_path' => $temp_path,
-         'read_temp_path' => $read_temp_path,
-       );
-       $request->session()->put('data', $data);
-       // \Debugbar::info($form['image'], $data);
-       return view('review.confirm', compact('form', 'data'));
+       //ローカル環境での処理
+       // $temp_path = $request->file('image')->store('public/temp');
+       // $read_temp_path = str_replace('public/', 'storage/', $temp_path);
+       //
+       // $data = array(
+       //   'temp_path' => $temp_path,
+       //   'read_temp_path' => $read_temp_path,
+       // );
+       // $request->session()->put('data', $data);
+       // // \Debugbar::info($form['image'], $data);
+       // return view('review.confirm', compact('form', 'data'));
      }
-
 
      unset($form['_token']);  //_tokeの削除は必須
      unset($form['image']);
@@ -156,20 +159,25 @@ class ReviewController extends Controller {
      $form = $request->all();
      $book = new Book;
      $review = new Review;
-     if ($request->session()->has('data')) {
-        $data = $request->session()->pull('data');
-        $temp_path = $data['temp_path'];
-        $read_temp_path = $data['read_temp_path'];
-        // unset($data['read_temp_path']);
 
-        $filename = str_replace('public/temp/', '', $temp_path);
-        $storage_path = 'public/bookimage/'.$filename;
+     if (isset($form['read_path'])) {
+       $book->image_path = $form['read_path'];
 
-        Storage::move($temp_path, $storage_path);
+     // ローカル環境での処理
+     // if ($request->session()->has('data')) {
+        // $data = $request->session()->pull('data');
+        // $temp_path = $data['temp_path'];
+        // $read_temp_path = $data['read_temp_path'];
+        // // unset($data['read_temp_path']);
+        //
+        // $filename = str_replace('public/temp/', '', $temp_path);
+        // $storage_path = 'public/bookimage/'.$filename;
+        //
+        // Storage::move($temp_path, $storage_path);
+        //
+        // $read_path = str_replace('public/', 'storage/', $storage_path);
+        // $book->image_path = $read_path;
 
-        $read_path = str_replace('public/', 'storage/', $storage_path);
-        $book->image_path = $read_path;
-        // $book->image_path = Storage::dist('s3')->url($read_path);
       } else {
         $book->image_path = null;
       }
