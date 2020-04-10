@@ -131,22 +131,17 @@ class ReviewController extends Controller {
      if (isset($form['image'])) {
        $this->validate($request, Book::$image_rules);
 
-       $path = Storage::disk('s3')->putFile('/', $form['image'], 'public');
-       $read_path = Storage::disk('s3')->url($path);
+       $temp_path = $request->file('image')->store('public/temp');
+       // $temp_path = Storage::disk('s3')->putFile('/', $form['image'], 'public');
+       $read_temp_path = str_replace('public/', 'storage/', $temp_path);
 
-       return view('review.confirm', compact('form', 'read_path'));
-
-       // 開発環境での処理
-       // $temp_path = $request->file('image')->store('public/temp');
-       // $read_temp_path = str_replace('public/', 'storage/', $temp_path);
-       //
-       // $data = array(
-       //   'temp_path' => $temp_path,
-       //   'read_temp_path' => $read_temp_path,
-       // );
-       // $request->session()->put('data', $data);
+       $data = array(
+         'temp_path' => $temp_path,
+         'read_temp_path' => $read_temp_path,
+       );
+       $request->session()->put('data', $data);
        // \Debugbar::info($form['image'], $data);
-       // return view('review.confirm', compact('form', 'data'));
+       return view('review.confirm', compact('form', 'data'));
      }
 
 
