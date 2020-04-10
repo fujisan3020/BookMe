@@ -221,11 +221,17 @@ class ReviewController extends Controller {
      $book = Book::find($review->book_id);
      $form = $request->all();
 
-     if ($request->file('image')) {
+     if (isset($form['image'])) {
        $this->validate($request, Book::$image_rules);
-       $storage_path = $request->file('image')->store('public/bookimage');
-       $read_path = str_replace('public/', 'storage/', $storage_path);
-       $book->image_path = $read_path;
+
+       $path = Storage::disk('s3')->putFile('/', $form['image'], 'public');
+       $book->image_path = Storage::disk('s3')->url($path);
+
+       // ローカル環境での処理
+       // $storage_path = $request->file('image')->store('public/bookimage');
+       // $read_path = str_replace('public/', 'storage/', $storage_path);
+       // $book->image_path = $read_path;
+
      } elseif ($request->input('remove')) {
          $book->image_path = null;
      } else {
