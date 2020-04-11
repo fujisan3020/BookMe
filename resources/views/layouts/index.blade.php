@@ -180,7 +180,7 @@
       楽天市場で本を検索・購入する
     </div>
     </a>
-    <a href="https://www.mercari.com/jp/" class="alert-link" target="_blank">
+    <a href="https://www.mercari.com/jp/" class="alert-link" target="">
     <div class="alert alert-info container text-sm-center" role="alert">
       メルカリで本を購入する
     </div>
