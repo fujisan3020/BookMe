@@ -133,7 +133,7 @@ class ReviewController extends Controller {
 
        $path = Storage::disk('s3')->putFile('/', $form['image'], 'public');
        $read_path = Storage::disk('s3')->url($path);
-       return view('review.confirm', compact('form', 'read_path'));
+       return view('review.confirm', compact('form', 'path', 'read_path'));
 
        //ローカル環境での処理
        // $temp_path = $request->file('image')->store('public/temp');
@@ -195,6 +195,15 @@ class ReviewController extends Controller {
      $review->save();
      // \Debugbar::info($book->image_path);
      return redirect('/');
+   }
+
+   public function back(Request $request) {
+    if (isset($request->path)) {
+      $path = $request->path;
+      // dd($path);
+      Storage::disk('s3')->delete($path);
+    }
+    return back();
    }
 
 

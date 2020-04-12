@@ -58,6 +58,9 @@
       font-size: 18px;
       color: red;
     }
+    .back {
+      margin-left: 60px;
+    }
     /* .content_image {
       margin: 0 0 10px 400px;
     } */

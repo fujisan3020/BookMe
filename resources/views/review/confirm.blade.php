@@ -60,19 +60,23 @@
         </div>
       </fieldset>
 
-      <form action="{{ action('ReviewController@store') }}" method="post" enctype="multipart/form-data">
-        @csrf
-        <input type="hidden" name="title" value="{{ $form['title'] }}">
-        <input type="hidden" name="genre" value="{{ $form['genre'] }}">
-        <input type="hidden" name="author" value="{{ $form['author'] }}">
-        <input type="hidden" name="publisher" value="{{ $form['publisher'] }}">
-        @if (isset($read_path))
+      <div class="">
+        <form action="{{ action('ReviewController@store') }}" method="post" enctype="multipart/form-data">
+          @csrf
+          <input type="hidden" name="title" value="{{ $form['title'] }}">
+          <input type="hidden" name="genre" value="{{ $form['genre'] }}">
+          <input type="hidden" name="author" value="{{ $form['author'] }}">
+          <input type="hidden" name="publisher" value="{{ $form['publisher'] }}">
+          @if (isset($read_path))
           <input type="hidden" name="read_path" value="{{ $read_path }}">
-        @endif
-        <input type="hidden" name="review" value="{{ $form['review'] }}">
-        <input type="hidden" name="practice" value="{{ $form['practice'] }}">
+          @endif
+          <input type="hidden" name="review" value="{{ $form['review'] }}">
+          <input type="hidden" name="practice" value="{{ $form['practice'] }}">
 
-        <input class="btn btn-primary" type="submit" value="投稿">
-      </form>
+          <input class="btn btn-primary" type="submit" value="投稿">
+          <a class="btn btn-danger back" href="{{ action('ReviewController@back', ['path' => $path]) }}" role="button">戻る</a>
+        </form>
+
+      </div>
   </div>
 @endsection
