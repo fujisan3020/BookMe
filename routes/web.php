@@ -54,10 +54,10 @@ Route::group(['middleware' => 'auth'], function() {
   Route::get('/review/create', 'ReviewController@create');
   //入力されたレビューの確認
   Route::post('/review/create', 'ReviewController@confirm');
-  //レビュー作成画面に戻る
-  Route::get('/review/confirm/back', 'ReviewController@back');
   //レビュー作成・投稿
   Route::post('/review/confirm', 'ReviewController@store');
+  //レビュー作成画面に戻る
+  Route::get('/review/confirm/back', 'ReviewController@back');
 
 
   //マイレビュー画面の表示

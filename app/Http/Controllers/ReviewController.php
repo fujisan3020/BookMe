@@ -197,6 +197,7 @@ class ReviewController extends Controller {
      return redirect('/');
    }
 
+   //レビュー作成画面に戻る(+ s3の画像を削除)
    public function back(Request $request) {
     if (isset($request->path)) {
       $path = $request->path;
