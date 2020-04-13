@@ -74,7 +74,12 @@
           <input type="hidden" name="practice" value="{{ $form['practice'] }}">
 
           <input class="btn btn-primary" type="submit" value="投稿">
-          <a class="btn btn-danger back" href="{{ action('ReviewController@back', ['path' => $path]) }}" role="button">戻る</a>
+
+          @if (isset($path))
+          <a class="btn btn-danger back" href="{{ action('ReviewController@back', ['form' => $form, 'path' => $path]) }}" role="button">戻る</a>
+          @else
+          <a class="btn btn-danger back" href="{{ action('ReviewController@back', ['form' => $form]) }}" role="button">戻る</a>
+          @endif
         </form>
 
       </div>

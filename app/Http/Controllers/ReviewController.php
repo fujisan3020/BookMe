@@ -197,14 +197,17 @@ class ReviewController extends Controller {
      return redirect('/');
    }
 
-   //レビュー作成画面に戻る(+ s3の画像を削除)
+   //レビュー作成画面に戻る(+ s3の画像も削除)
    public function back(Request $request) {
+    $form = $request->form;
     if (isset($request->path)) {
       $path = $request->path;
       // dd($path);
       Storage::disk('s3')->delete($path);
+      unset($form['_token']);
+      // dd($form);
     }
-    return back();
+    return back()->withInput($form);
    }
 
 
